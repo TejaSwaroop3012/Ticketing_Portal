@@ -17,8 +17,15 @@ namespace TipMvcApp
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+            /*builder.Services.AddMvc(options =>
+            {
+                options.Filters.Add(new LogActionFilterAttribute());
+            });
+
+            builder.Services.AddSession();*/
 
             var app = builder.Build();
 
@@ -32,7 +39,7 @@ namespace TipMvcApp
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            //app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();

@@ -1,4 +1,6 @@
 
+using TicketPriorityLibrary.Repos;
+
 namespace TicketPriorityWebAPI
 {
     public class Program
@@ -13,6 +15,7 @@ namespace TicketPriorityWebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<ITicketPriorityRepoAsync,EFTicketPriorityRepoAsync>();
 
             var app = builder.Build();
 
