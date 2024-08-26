@@ -13,7 +13,7 @@ public partial class TicketType
 
     public int PriorityId { get; set; }
 
-    public virtual Employee AssignedToEmp { get; set; } = null!;
+    public virtual Employee? AssignedToEmp { get; set; } = null!;
 
-    public virtual TicketPriority Priority { get; set; } = null!;
+    public virtual TicketPriority? Priority { get; set; } = null!;
 }
