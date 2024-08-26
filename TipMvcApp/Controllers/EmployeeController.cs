@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace TipMvcApp.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class EmployeeController : Controller
     {
         static HttpClient client = new HttpClient { BaseAddress = new Uri("http://localhost:5292/api/Employee/") };
@@ -33,7 +33,7 @@ namespace TipMvcApp.Controllers
             }
         }
         // GET: EmployeeController/Create
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -42,7 +42,7 @@ namespace TipMvcApp.Controllers
         // POST: EmployeeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(Employee employee)
         {
             try
@@ -58,7 +58,7 @@ namespace TipMvcApp.Controllers
 
         // GET: EmployeeController/Edit/5
         [Route("Employee/Edit/{empId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int empId)
         {
             Employee employee = await client.GetFromJsonAsync<Employee>($"{empId}");
@@ -69,7 +69,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Employee/Edit/{empId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int empId, Employee employee)
         {
             try
@@ -85,7 +85,7 @@ namespace TipMvcApp.Controllers
 
         // GET: EmployeeController/Delete/5
         [Route("Employee/Delete/{empId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int empId)
         {
             Employee employee = await client.GetFromJsonAsync<Employee>($"{empId}");
@@ -96,7 +96,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Employee/Delete/{empId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int empId,Employee employee)
         {
             try
