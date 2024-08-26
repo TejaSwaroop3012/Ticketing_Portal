@@ -1,0 +1,6 @@
+@TicketPriorityWebAPI_HostAddress = http://localhost:5133
+
+GET {{TicketPriorityWebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
