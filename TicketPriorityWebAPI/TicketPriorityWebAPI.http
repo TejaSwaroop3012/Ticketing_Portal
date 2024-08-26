@@ -1,6 +1,30 @@
 @TicketPriorityWebAPI_HostAddress = http://localhost:5133
 
-GET {{TicketPriorityWebAPI_HostAddress}}/weatherforecast/
+GET {{TicketPriorityWebAPI_HostAddress}}/api/TicketPriority/
 Accept: application/json
 
+###
+POST {{TicketPriorityWebAPI_HostAddress}}/api/TicketPriority/
+Content-Type: application/json
+{
+    "priorityId": 2,
+    "priorityName": "High",
+    "respondWithin": 2,
+    "resolveWithin": 3
+}
+###
+GET {{TicketPriorityWebAPI_HostAddress}}/api/TicketPriority/1
+Accept: application/json
+###
+PUT {{TicketPriorityWebAPI_HostAddress}}/api/TicketPriority/2
+Content-Type: application/json
+{
+    "priorityId": 2,
+    "priorityName": "High",
+    "respondWithin": 2,
+    "resolveWithin": 4
+}
+###
+DELETE {{TicketPriorityWebAPI_HostAddress}}/api/TicketPriority/2
+Accept: application/json
 ###
