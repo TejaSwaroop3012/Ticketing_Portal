@@ -1,6 +1,60 @@
 @TicketFollowUpWebAPI_HostAddress = http://localhost:5076
 
-GET {{TicketFollowUpWebAPI_HostAddress}}/weatherforecast/
+GET {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/
 Accept: application/json
+###
 
+GET {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/1/1
+Accept: application/json
+###
+
+GET {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/ByStatus/Pending
+Accept: application/json
+###
+
+GET {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/ByTicketId/1
+Accept: application/json
+###
+
+GET {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/ByDate/2024-08-26
+Accept: application/json
+###
+
+GET {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/GetTicket/1
+Accept: application/json
+###
+
+POST {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/Ticket
+Content-Type: application/json
+{
+"ticketId" : 0
+}
+###
+
+POST {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp
+Content-Type: application/json
+{
+"ticketId": 2,
+  "srNo": 1,
+  "Status": "Pending",
+  "updatedDate": "2024-08-26",
+  "remarks": "We are facing same issue"
+}
+###
+
+PUT {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/2/1
+Content-Type: application/json
+{
+"ticketId": 2,
+  "srNo": 1,
+  "Status": "Pending",
+  "updatedDate": "2024-08-26",
+  "remarks": "We got the Isuue And trying to solve"
+}
+###
+
+DELETE {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/2/1
+###
+
+DELETE {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/DelTicket/2
 ###

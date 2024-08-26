@@ -1,4 +1,6 @@
 
+using TicketFollowUpLibrary.Repos;
+
 namespace TicketFollowUpWebAPI
 {
     public class Program
@@ -13,6 +15,7 @@ namespace TicketFollowUpWebAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<ITicketFollowUpRepoAsync, EFTicketFollowUpRepoAsync>();
 
             var app = builder.Build();
 

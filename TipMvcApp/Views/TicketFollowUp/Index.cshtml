@@ -1,0 +1,62 @@
+﻿@model IEnumerable<TipMvcApp.Models.TicketFollowUp>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SrNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SrNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { ticketId = item.TicketId, srNo = item.SrNo }) |
+                @Html.ActionLink("Details", "Details", new { ticketId = item.TicketId, srNo = item.SrNo }) |
+                    @Html.ActionLink("ByDate", "ByDate", new { updatedDate = item.UpdatedDate }) |
+                    @Html.ActionLink("ByStatus", "ByStatus", new { status = item.Status }) |
+                    @Html.ActionLink("ByTicketId", "ByTicketId", new { ticketId = item.TicketId }) |
+                    @Html.ActionLink("Delete", "Delete", new { ticketId = item.TicketId, srNo = item.SrNo })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
