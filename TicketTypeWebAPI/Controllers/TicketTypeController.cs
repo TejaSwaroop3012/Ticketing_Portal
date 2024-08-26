@@ -41,7 +41,7 @@ namespace TicketTypeWebAPI.Controllers
             }
             catch (TicketTypeException ex)
             {
-                return NotFound();
+                return NotFound(ex.Message);
             }
         }
 
@@ -55,7 +55,7 @@ namespace TicketTypeWebAPI.Controllers
             }
             catch (TicketTypeException ex)
             {
-                return NotFound();
+                return NotFound(ex.Message);
             }
         }
         [HttpGet("ByPriority/{priorityId}")]
@@ -68,7 +68,7 @@ namespace TicketTypeWebAPI.Controllers
             }
             catch (TicketTypeException ex)
             {
-                return NotFound();
+                return NotFound(ex.Message);
             }
         }
         [HttpPost]
@@ -84,7 +84,7 @@ namespace TicketTypeWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
+        [HttpPost("Employee")]
         public async Task<ActionResult> Insert2(Employee employee)
         {
             try
@@ -97,13 +97,13 @@ namespace TicketTypeWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPost]
+        [HttpPost("TicketPriority")]
         public async Task<ActionResult> Insert3(TicketPriority ticketPriority)
         {
             try
             {
                 await ticket.AddPriority(ticketPriority);
-                return Created($"api/TicketPriority/{ticketPriority.PriorityId}", ticketPriority);
+                return Created($"api/TicketType/{ticketPriority.PriorityId}", ticketPriority);
             }
             catch (TicketTypeException ex)
             {
@@ -116,7 +116,7 @@ namespace TicketTypeWebAPI.Controllers
             try
             {
                 await ticket.UpdateTicketType(TypeId, type);
-                return Ok();
+                return Ok(type);
             }
             catch (TicketTypeException ex)
             {
