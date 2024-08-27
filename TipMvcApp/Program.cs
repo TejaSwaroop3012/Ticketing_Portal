@@ -39,7 +39,7 @@ namespace TipMvcApp
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-            //app.UseSession();
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
