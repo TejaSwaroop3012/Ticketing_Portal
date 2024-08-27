@@ -42,10 +42,10 @@ namespace EmployeeWebAPI.Controllers
             try
             {
                 await employeeRepository.InsertEmployee(employee);
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+               /* HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
                 await client.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
                 HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
-                await client1.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
+                await client1.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });*/
                 return Created($"api/Employee/{employee.EmpId}", employee);
             }
             catch(EmployeeException ex)

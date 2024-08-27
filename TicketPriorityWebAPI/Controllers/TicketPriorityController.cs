@@ -41,8 +41,8 @@ namespace TicketPriorityWebAPI.Controllers
             try
             {
                 await ticketPriorityRepo.InsertTicketPriority(ticketPriority);
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
-                await client.PostAsJsonAsync("TicketPriority", new { PriorityId = ticketPriority.PriorityId });
+               /* HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                await client.PostAsJsonAsync("TicketPriority", new { PriorityId = ticketPriority.PriorityId });*/
                 return Created($"api/TicketPriority/{ticketPriority.PriorityId}", ticketPriority);
             }
             catch(TicketPriorityException ex)
