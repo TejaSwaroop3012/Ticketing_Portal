@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TicketPriorityLibrary.Models;
@@ -41,8 +42,8 @@ namespace TicketPriorityWebAPI.Controllers
             try
             {
                 await ticketPriorityRepo.InsertTicketPriority(ticketPriority);
-               /* HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
-                await client.PostAsJsonAsync("TicketPriority", new { PriorityId = ticketPriority.PriorityId });*/
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                await client.PostAsJsonAsync("TicketPriority", new { PriorityId = ticketPriority.PriorityId });
                 return Created($"api/TicketPriority/{ticketPriority.PriorityId}", ticketPriority);
             }
             catch(TicketPriorityException ex)
@@ -64,17 +65,27 @@ namespace TicketPriorityWebAPI.Controllers
             }
         }
         [HttpDelete("{priorityId}")]
-        public async Task<ActionResult> Delete(int priorityId)
+        public async Task<ActionResult> Delete(int priorityId,TicketPriority ticketPriority)
         {
             try
             {
-                await ticketPriorityRepo.DeleteTicketPriority(priorityId);
-                return Ok();
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri(" http://localhost:5031/api/TicketType/") };
+                var response1 = await client2.DeleteAsync("FromPriority/" + priorityId);
+                if (response1.IsSuccessStatusCode)
+                {
+                    await ticketPriorityRepo.DeleteTicketPriority(priorityId);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Cannot delete the priorityId");
+                }
             }
-            catch( TicketPriorityException ex)
+            catch (TicketPriorityException ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+        
     }
 }

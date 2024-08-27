@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using EmployeeLibrary.Models;
 using EmployeeLibrary.Repos;
 using Microsoft.AspNetCore.Authorization;
+using Azure;
 
 
 namespace EmployeeWebAPI.Controllers
@@ -42,10 +43,10 @@ namespace EmployeeWebAPI.Controllers
             try
             {
                 await employeeRepository.InsertEmployee(employee);
-               /* HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
                 await client.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
                 HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
-                await client1.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });*/
+                await client1.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
                 return Created($"api/Employee/{employee.EmpId}", employee);
             }
             catch(EmployeeException ex)
@@ -67,12 +68,23 @@ namespace EmployeeWebAPI.Controllers
             }
         }
         [HttpDelete("{empId}")]
-        public async Task<ActionResult> Delete(int empId)
+        public async Task<ActionResult> Delete(int empId,Employee employee)
         {
             try
             {
-                await employeeRepository.DeleteEmployee(empId);
-                return Ok();
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                var response1=await client.DeleteAsync("Employee/"+ empId );
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                var response2=await client1.DeleteAsync("Employee"+ empId );
+                if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+                {
+                    await employeeRepository.DeleteEmployee(empId);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Cannot delete the Employee");
+                }
             }
             catch(EmployeeException ex)
             {
