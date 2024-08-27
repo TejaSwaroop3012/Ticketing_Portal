@@ -62,7 +62,7 @@ namespace TipMvcApp.Controllers
         }
 
         // GET: TicketFollowUpController/Edit/5
-        [Authorize (Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         [Route("TicketFollowUp/Edit/{ticketId}/{srNo}")]
         public async Task<ActionResult> Edit(int ticketId, int srNo)
         {
@@ -73,6 +73,7 @@ namespace TipMvcApp.Controllers
         // POST: TicketFollowUpController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         [Route("TicketFollowUp/Edit/{ticketId}/{srNo}")]
         public async Task<ActionResult> Edit(int ticketId, int srNo, TicketFollowUp ticketFollowUp)
         {
@@ -88,6 +89,7 @@ namespace TipMvcApp.Controllers
         }
 
         // GET: TicketFollowUpController/Delete/5
+        [Authorize(Roles = "Admin")]
         [Route("TicketFollowUp/Delete/{ticketId}/{srNo}")]
         public async Task<ActionResult> Delete(int ticketId, int srNo)
         {
@@ -98,6 +100,7 @@ namespace TipMvcApp.Controllers
         // POST: TicketFollowUpController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         [Route("TicketFollowUp/Delete/{ticketId}/{srNo}")]
         public async Task<ActionResult> Delete(int ticketId, int srNo, IFormCollection collection)
         {

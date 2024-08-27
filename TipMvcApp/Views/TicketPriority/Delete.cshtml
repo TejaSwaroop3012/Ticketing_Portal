@@ -1,4 +1,4 @@
-﻿@model TipMvcApp.Models.TicketFollowUp
+﻿@model TipMvcApp.Models.TicketPriority
 
 @{
     ViewData["Title"] = "Delete";
@@ -8,44 +8,37 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>TicketFollowUp</h4>
+    <h4>TicketPriority</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TicketId)
+            @Html.DisplayNameFor(model => model.PriorityId)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TicketId)
+            @Html.DisplayFor(model => model.PriorityId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SrNo)
+            @Html.DisplayNameFor(model => model.PriorityName)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SrNo)
+            @Html.DisplayFor(model => model.PriorityName)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
+            @Html.DisplayNameFor(model => model.RespondWithin)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
+            @Html.DisplayFor(model => model.RespondWithin)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Remarks)
+            @Html.DisplayNameFor(model => model.ResolveWithin)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Remarks)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedDate)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedDate)
+            @Html.DisplayFor(model => model.ResolveWithin)
         </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a type="submit" class="btn btn-outline-primary" asp-action="Index">Back to List</a>
-
     </form>
 </div>
