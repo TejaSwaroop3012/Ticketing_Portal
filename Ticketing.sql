@@ -1,0 +1,69 @@
+﻿CREATE DATABASE EmployeeDB
+USE EmployeeDB
+CREATE TABLE Employee (
+EmpId INT PRIMARY KEY,
+FirstName VARCHAR(20) NOT NULL,
+LastName VARCHAR(20) NOT NULL,
+EmailId VARCHAR(40) UNIQUE,
+MobileNo VARCHAR(15) UNIQUE
+);
+
+CREATE DATABASE TicketPriorityDB
+USE TicketPriorityDB
+CREATE TABLE TicketPriority (
+PriorityId INT PRIMARY KEY,
+PriorityName VARCHAR(20)  NOT NULL,
+RespondWithin INT  NOT NULL,
+ResolveWithin INT  NOT NULL
+);
+
+CREATE DATABASE TicketTypeDB
+USE TicketTypeDB
+CREATE TABLE Employee (
+EmpId INT PRIMARY KEY
+)
+CREATE TABLE TicketPriority (
+PriorityId INT PRIMARY KEY
+)
+CREATE TABLE TicketType (
+TicketTypeId INT PRIMARY KEY,
+TicketTypeName VARCHAR(30),
+AssignedToEmpId INT  NOT NULL,
+PriorityId INT  NOT NULL,
+FOREIGN KEY (AssignedToEmpId) REFERENCES Employee(EmpId),
+FOREIGN KEY (PriorityId) REFERENCES TicketPriority(PriorityId)
+);
+
+CREATE DATABASE TicketDB
+USE TicketDB
+CREATE TABLE Employee (
+EmpId INT PRIMARY KEY
+)
+CREATE TABLE TicketType (
+TicketTypeId INT PRIMARY KEY
+)
+CREATE TABLE Ticket (
+TicketId INT IDENTITY(1,1) PRIMARY KEY,
+EmpId INT  NOT NULL,
+TicketTypeId INT  NOT NULL,
+Subject VARCHAR(50) NOT NULL,
+Description VARCHAR(100) NOT NULL,
+CreatedDate DATETIME DEFAULT GETDATE(),
+FOREIGN KEY (EmpId) REFERENCES Employee(EmpId),
+FOREIGN KEY (TicketTypeId) REFERENCES TicketType(TicketTypeId)
+);
+
+CREATE DATABASE TicketFollowupDB
+USE TicketFollowupDB
+CREATE TABLE Ticket (
+TicketId INT IDENTITY(1,1) PRIMARY KEY
+)
+CREATE TABLE TicketFollowup (
+TicketId INT,
+SrNo INT,
+Status VARCHAR(50)  NOT NULL,
+UpdatedDate DATETIME DEFAULT GETDATE(),
+Remarks VARCHAR(100)  NOT NULL,
+PRIMARY KEY (TicketId, SrNo),
+FOREIGN KEY (TicketId) REFERENCES Ticket(TicketId)
+);

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TipMvcApp.Models.TicketFollowUp>
+
+@{
+    ViewData["Title"] = "ByTicketId";
+}
+
+<h1>ByTicketId</h1>
+
+
+<table class="table table-hover table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SrNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Remarks)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SrNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Remarks)
+            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a type="submit" class="btn btn-outline-primary" asp-action="Index">Back to List</a>
+</div>

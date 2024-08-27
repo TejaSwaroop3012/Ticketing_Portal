@@ -1,6 +1,32 @@
 @EmployeeWebAPI_HostAddress = http://localhost:5292
 
-GET {{EmployeeWebAPI_HostAddress}}/weatherforecast/
+GET {{EmployeeWebAPI_HostAddress}}/api/Employee/
 Accept: application/json
 
+###
+POST {{EmployeeWebAPI_HostAddress}}/api/Employee/
+Content-Type: application/json
+{
+    "empId": 3,
+    "firstName": "Tejas",
+    "lastName": "Gante",
+    "emailId": "Tejas@gmail.com",
+    "mobileNo": "7815912345" 
+}
+###
+GET {{EmployeeWebAPI_HostAddress}}/api/Employee/3
+Accept: application/json
+###
+PUT {{EmployeeWebAPI_HostAddress}}/api/Employee/3
+Content-Type: application/json
+{
+  "empId": 3,
+  "firstName": "Tejas",
+  "lastName": "Gante",
+  "emailId": "Tejasgante@gmail.com",
+  "mobileNo": "7815912345"
+}
+###
+DELETE {{EmployeeWebAPI_HostAddress}}/api/Employee/3
+Aceept: application/json
 ###
