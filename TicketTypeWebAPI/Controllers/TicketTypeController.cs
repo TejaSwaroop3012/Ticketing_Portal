@@ -5,11 +5,13 @@ using TicketTypeLibrary.Models;
 using TicketTypeLibrary.Repos;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TicketTypeWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TicketTypeController : ControllerBase
     {
         ITicketTypeRepoAsync ticket;
