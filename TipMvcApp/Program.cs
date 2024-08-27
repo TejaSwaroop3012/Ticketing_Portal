@@ -23,9 +23,9 @@ namespace TipMvcApp
             /*builder.Services.AddMvc(options =>
             {
                 options.Filters.Add(new LogActionFilterAttribute());
-            });
+            });*/
 
-            builder.Services.AddSession();*/
+            builder.Services.AddSession();
 
             var app = builder.Build();
 

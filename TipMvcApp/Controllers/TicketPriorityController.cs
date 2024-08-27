@@ -12,9 +12,9 @@ namespace TipMvcApp.Controllers
         // GET: TicketPriorityController
         public async Task<ActionResult> Index()
         {
-            /*string token = HttpContext.Session.GetString("token");
+            string token = HttpContext.Session.GetString("token");
             client.DefaultRequestHeaders.Authorization = new
-                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);*/
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             List<TicketPriority> ticketPriorities = await client.GetFromJsonAsync<List<TicketPriority>>("");
             return View(ticketPriorities);
         }

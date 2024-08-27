@@ -19,7 +19,7 @@ namespace TicketPriorityWebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<ITicketPriorityRepoAsync,EFTicketPriorityRepoAsync>();
-            /*builder.Services.AddAuthentication(Options =>
+            builder.Services.AddAuthentication(Options =>
             {
                 Options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 Options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -38,7 +38,7 @@ namespace TicketPriorityWebAPI
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                         "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son"))
                 };
-            });*/
+            });
 
             var app = builder.Build();
 
@@ -48,7 +48,7 @@ namespace TicketPriorityWebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            //app.UseAuthentication();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

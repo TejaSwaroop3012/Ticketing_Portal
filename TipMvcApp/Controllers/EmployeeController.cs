@@ -12,9 +12,9 @@ namespace TipMvcApp.Controllers
         // GET: EmployeeController
         public async Task<ActionResult> Index()
         {
-            /*string token = HttpContext.Session.GetString("token");
+            string token = HttpContext.Session.GetString("token");
             client.DefaultRequestHeaders.Authorization = new
-                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);*/
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             List<Employee> employees = await client.GetFromJsonAsync<List<Employee>>("");
             return View(employees);
         }
