@@ -65,12 +65,12 @@ namespace TicketPriorityWebAPI.Controllers
             }
         }
         [HttpDelete("{priorityId}")]
-        public async Task<ActionResult> Delete(int priorityId,TicketPriority ticketPriority)
+        public async Task<ActionResult> Delete(int priorityId)
         {
             try
             {
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
-                var response1 = await client.DeleteAsync($"FromPriority/{priorityId}");
+                HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                var response1 = await client5.DeleteAsync($"FromPriority/{priorityId}");
                 if (response1.IsSuccessStatusCode)
                 {
                     await ticketPriorityRepo.DeleteTicketPriority(priorityId);

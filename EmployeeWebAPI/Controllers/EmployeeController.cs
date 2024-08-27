@@ -43,10 +43,10 @@ namespace EmployeeWebAPI.Controllers
             try
             {
                 await employeeRepository.InsertEmployee(employee);
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
-                await client.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
                 await client1.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                await client2.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
                 return Created($"api/Employee/{employee.EmpId}", employee);
             }
             catch(EmployeeException ex)
@@ -68,7 +68,7 @@ namespace EmployeeWebAPI.Controllers
             }
         }
         [HttpDelete("{empId}")]
-        public async Task<ActionResult> Delete(int empId,Employee employee)
+        public async Task<ActionResult> Delete(int empId)
         {
             try
             {
