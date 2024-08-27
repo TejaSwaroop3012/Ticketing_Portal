@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TipMvcApp.Models;
 
 namespace TipMvcApp.Controllers
 {
+    [Authorize]
     public class TicketController : Controller
     {
         static HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
@@ -11,6 +13,9 @@ namespace TipMvcApp.Controllers
         public async Task<ActionResult> Index()
         {
             List<Ticket> tickets = await client.GetFromJsonAsync <List<Ticket>>("");
+            string token = HttpContext.Session.GetString("token");
+            client.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             return View(tickets);
         }
         //public async Task<ActionResult> GetAllByEmpId(int empId)
@@ -111,6 +116,7 @@ namespace TipMvcApp.Controllers
 
         // GET: TicketController/Edit/5
         [Route("Ticket/Edit/{ticketId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int ticketId)
         {
             Ticket ticket1 = await client.GetFromJsonAsync<Ticket>($"GetTicketByTicketId/{ticketId}");
@@ -121,6 +127,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Ticket/Edit/{ticketId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int ticketId, Ticket ticket)
         {
             try
@@ -137,6 +144,7 @@ namespace TipMvcApp.Controllers
 
         // GET: TicketController/Delete/5
         [Route("Ticket/Delete/{ticketId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int ticketId)
         {
             Ticket ticket = await client.GetFromJsonAsync<Ticket>($"GetTicketByTicketId/{ticketId}");
@@ -147,6 +155,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Ticket/Delete/{ticketId}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int ticketId, IFormCollection collection)
         {
             try

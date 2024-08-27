@@ -23,9 +23,9 @@ namespace TipMvcApp
             /*builder.Services.AddMvc(options =>
             {
                 options.Filters.Add(new LogActionFilterAttribute());
-            });
+            });*/
 
-            builder.Services.AddSession();*/
+            builder.Services.AddSession();
 
             var app = builder.Build();
 
@@ -39,7 +39,7 @@ namespace TipMvcApp
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-            //app.UseSession();
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
