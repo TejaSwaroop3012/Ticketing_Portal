@@ -1,0 +1,53 @@
+﻿@model IEnumerable<TipMvcApp.Models.TicketType>
+
+@{
+    ViewData["Title"] = "ByAssignedEmpId";
+}
+
+<h1>ByAssignedEmpId</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketTypeId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TicketTypeName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssignedToEmpId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriorityId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketTypeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TicketTypeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignedToEmpId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PriorityId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

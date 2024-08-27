@@ -19,16 +19,23 @@ namespace TicketTypeWebAPI.Controllers
         }
         [HttpGet]
         public async Task<ActionResult> Index1()
-        {
-            List<TicketType> ticketTypes = await ticket.GetAllTicketType();
-            return Ok(ticketTypes);
+        {          
+                List<TicketType> ticketTypes = await ticket.GetAllTicketType();
+                return Ok(ticketTypes);           
         }
 
         [HttpGet("ByEmployeeId/{EmpId}")]
         public async Task<ActionResult> Index2(int EmpId)
         {
-            List<TicketType> ticketTypes = await ticket.GetAllbyAssignedEmpId(EmpId);
-            return Ok(ticketTypes);
+            try
+            {
+                List<TicketType> ticketTypes = await ticket.GetAllbyAssignedEmpId(EmpId);
+                return Ok(ticketTypes);
+            }
+            catch(Exception ex)
+            {
+                throw new TicketTypeException(ex.Message);
+            }
         }
         
         [HttpGet("ByTypeId/{typdId}")]

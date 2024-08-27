@@ -1,6 +1,75 @@
 @TicketTypeWebAPI_HostAddress = http://localhost:5031
 
-GET {{TicketTypeWebAPI_HostAddress}}/TicketType/
+GET {{TicketTypeWebAPI_HostAddress}}/api/TicketType/
 Accept: application/json
 
 ###
+POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType/
+Content-Type: application/json
+{
+    "ticketTypeId": 2,
+    "ticketTypeName": "Hardware Issue",
+    "assignedToEmpId": 1,
+    "priorityId": 1,
+    "assignedToEmp": null,
+    "priority": null
+ }
+###
+POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType/Employee
+Content-Type : application/json
+{
+  "empId": 2
+}
+###
+POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType/TicketPriority
+Content-Type : application/json
+{
+  "priorityId": 2
+}
+###
+POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType
+Content-Type: application/json
+{
+    "ticketTypeId": 2,
+    "ticketTypeName": "External HardWare Problem",
+    "assignedToEmpId": 1,
+    "priorityId": 1,
+    "assignedToEmp": null,
+    "priority": null
+ }
+
+###
+GET {{TicketTypeWebAPI_HostAddress}}/api/TicketType/ByEmployeeId/1
+Accept: application/json
+
+###
+GET {{TicketTypeWebAPI_HostAddress}}/api/TicketType/ByTypeId/2
+Accept: application/json
+
+###
+GET {{TicketTypeWebAPI_HostAddress}}/api/TicketType/ByPriority/2
+Accept: application/json
+
+###
+PUT  {{TicketTypeWebAPI_HostAddress}}/api/TicketType/2
+Content-Type: application/json
+{
+  
+  "ticketTypeId": 1,
+  "ticketTypeName": "Application error",
+  "assignedToEmpId": 1,
+  "priorityId": 1
+}
+
+###
+DELETE {{TicketTypeWebAPI_HostAddress}}/api/TicketType/FromTicketType/1
+Accept: application/json
+###
+DELETE {{TicketTypeWebAPI_HostAddress}}/api/TicketType/FromEmployee/1
+Accept: application/json
+
+###
+DELETE {{TicketTypeWebAPI_HostAddress}}/api/TicketType/FromPriority/1
+Accept: application/json
+
+

@@ -1,6 +1,7 @@
 
 using TicketTypeLibrary.Repos;
 using TicketTypeWebAPI.Controllers;
+using TicketTypeLibrary.Models;
 
 namespace TicketTypeWebAPI
 {

@@ -7,5 +7,5 @@ public partial class Employee
 {
     public int EmpId { get; set; }
 
-    public virtual ICollection<TicketType> TicketTypes { get; set; } = new List<TicketType>();
+    public virtual ICollection<TicketType>? TicketTypes { get; set; } = new List<TicketType>();
 }

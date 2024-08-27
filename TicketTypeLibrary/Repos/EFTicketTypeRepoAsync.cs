@@ -16,7 +16,7 @@ namespace TicketTypeLibrary.Repos
             try
             {
                 await ctx.Employees.AddAsync(Emp);
-                ctx.SaveChangesAsync();
+                await ctx.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -43,10 +43,11 @@ namespace TicketTypeLibrary.Repos
                 Employee employee = await (from emp in ctx.Employees where emp.EmpId == empId select emp).FirstAsync();
                 return employee;
             }
-            catch(Exception ex)
+            catch
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException("No such Employee");
             }
+            
         }
 
         public async Task DeleteEmployee(int EmpId)
@@ -55,11 +56,11 @@ namespace TicketTypeLibrary.Repos
             {
                 Employee employee = await GetEmployeebyId(EmpId);
                 ctx.Employees.Remove(employee);
-                ctx.SaveChangesAsync();
+                await ctx.SaveChangesAsync();
             }
-            catch 
+            catch (Exception ex)
             {
-                throw new TicketTypeException("No such Employee");
+                throw new TicketTypeException(ex.Message);
             }
         }
 
@@ -70,9 +71,9 @@ namespace TicketTypeLibrary.Repos
                 TicketPriority ticketPriority = await (from tp in ctx.TicketPriorities where tp.PriorityId == priorityId select tp).FirstAsync();
                 return ticketPriority;
             }
-            catch(Exception ex)
+            catch
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException("No such PriorityId");
             }
         }
 
@@ -84,9 +85,9 @@ namespace TicketTypeLibrary.Repos
                 ctx.TicketPriorities.Remove(ticketPriority);
                 await ctx.SaveChangesAsync();
             }
-            catch
+            catch (Exception ex)
             {
-                throw new TicketTypeException("No such Priority");
+                throw new TicketTypeException(ex.Message);
             }
         }
 
@@ -98,9 +99,9 @@ namespace TicketTypeLibrary.Repos
                 ctx.TicketTypes.Remove(ticketType);
                 await ctx.SaveChangesAsync();
             }
-            catch
+            catch (Exception ex)
             {
-                throw new TicketTypeException("No such Ticket Type");
+                throw new TicketTypeException(ex.Message);
             }
         }
 
@@ -124,15 +125,22 @@ namespace TicketTypeLibrary.Repos
         }
         public async Task<TicketType> GetTicketbyId(int TypeId)
         {
-            TicketType ticketType = await (from ty in ctx.TicketTypes where ty.TicketTypeId == TypeId select ty).FirstAsync();
-            return ticketType;
+            try
+            {
+                TicketType ticketType = await (from ty in ctx.TicketTypes where ty.TicketTypeId == TypeId select ty).FirstAsync();
+                return ticketType;
+            }
+            catch
+            {
+                throw new TicketTypeException("No such ticketId");
+            }
         }
         public async Task InsertTicketType(TicketType type)
         {
             try
             {
                 await ctx.TicketTypes.AddAsync(type);
-                ctx.SaveChangesAsync();
+                await ctx.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -146,13 +154,13 @@ namespace TicketTypeLibrary.Repos
             {
                 TicketType ticketType = await GetTicketbyId(TypeId);
                 ticketType.TicketTypeName = type.TicketTypeName;
-                ticketType.AssignedToEmp = type.AssignedToEmp;
+                ticketType.AssignedToEmpId = type.AssignedToEmpId;
                 ticketType.PriorityId = type.PriorityId;
                 await ctx.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException("Cannot Update");
             }
 
         }

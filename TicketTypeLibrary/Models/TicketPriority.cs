@@ -7,5 +7,5 @@ public partial class TicketPriority
 {
     public int PriorityId { get; set; }
 
-    public virtual ICollection<TicketType> TicketTypes { get; set; } = new List<TicketType>();
+    public virtual ICollection<TicketType>? TicketTypes { get; set; } = new List<TicketType>();
 }

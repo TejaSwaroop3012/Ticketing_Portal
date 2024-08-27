@@ -25,7 +25,7 @@ namespace TipMvcApp.Controllers
             var date = updatedDate.ToString("yyyy-MM-dd");
             List<TicketFollowUp> ticketFollowUps = await client.GetFromJsonAsync<List<TicketFollowUp>>($"ByDate/{date}");
             return View(ticketFollowUps);
-        }
+        }   
         public async Task<ActionResult> ByTicketId(int ticketId)
         {
             List<TicketFollowUp> ticketFollowUps = await client.GetFromJsonAsync<List<TicketFollowUp>>($"ByTicketId/{ticketId}");
