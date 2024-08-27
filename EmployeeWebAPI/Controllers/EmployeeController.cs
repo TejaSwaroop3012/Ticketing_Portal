@@ -73,9 +73,9 @@ namespace EmployeeWebAPI.Controllers
             try
             {
                 HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
-                var response1=await client.DeleteAsync("Employee/"+ empId );
+                var response1=await client.DeleteAsync("FromEmployee/" + empId );
                 HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
-                var response2=await client1.DeleteAsync("Employee"+ empId );
+                var response2=await client1.DeleteAsync("Employee/" + empId );
                 if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
                 {
                     await employeeRepository.DeleteEmployee(empId);

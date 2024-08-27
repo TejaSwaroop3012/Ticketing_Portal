@@ -69,7 +69,7 @@ namespace TicketPriorityWebAPI.Controllers
         {
             try
             {
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri(" http://localhost:5031/api/TicketType/") };
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
                 var response1 = await client2.DeleteAsync("FromPriority/" + priorityId);
                 if (response1.IsSuccessStatusCode)
                 {

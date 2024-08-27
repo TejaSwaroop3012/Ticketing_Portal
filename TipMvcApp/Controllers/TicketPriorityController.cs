@@ -77,7 +77,7 @@ namespace TipMvcApp.Controllers
         //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int priorityId)
         {
-            TicketPriority ticketPriority = await client.GetFromJsonAsync<TicketPriority>($"{priorityId}");
+            TicketPriority ticketPriority = await client.GetFromJsonAsync<TicketPriority>(""+ priorityId);
             return View(ticketPriority);
         }
         // POST: TicketPriorityController/Delete/5
