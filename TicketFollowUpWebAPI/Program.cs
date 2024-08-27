@@ -1,4 +1,7 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TicketFollowUpLibrary.Repos;
 
 namespace TicketFollowUpWebAPI
@@ -16,6 +19,26 @@ namespace TicketFollowUpWebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<ITicketFollowUpRepoAsync, EFTicketFollowUpRepoAsync>();
+            builder.Services.AddAuthentication(Options =>
+            {
+                Options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                Options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                Options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(Options =>
+            {
+                Options.SaveToken = true;
+                Options.RequireHttpsMetadata = false;
+                Options.TokenValidationParameters = new
+                            Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = "http://www.allcloud.in",
+                    ValidIssuer = "http://www.allcloud.in",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                        "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son"))
+                };
+            });
 
             var app = builder.Build();
 
@@ -26,6 +49,7 @@ namespace TicketFollowUpWebAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

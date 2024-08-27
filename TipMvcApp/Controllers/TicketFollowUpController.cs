@@ -12,6 +12,9 @@ namespace TipMvcApp.Controllers
         // GET: TicketFollowUpController
         public async Task<ActionResult> Index()
         {
+            string token = HttpContext.Session.GetString("token");
+            client.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             List<TicketFollowUp> ticketFollowUps = await client.GetFromJsonAsync<List<TicketFollowUp>>("");
             return View(ticketFollowUps);
         }

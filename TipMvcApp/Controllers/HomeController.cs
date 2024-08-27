@@ -13,8 +13,17 @@ namespace TipMvcApp.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                string userName = User.Identity.Name;
+                string role = User.Claims.ToArray()[4].Value;
+                string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                string token = await client2.GetStringAsync($"{userName}/{role}/{secretKey}");
+                HttpContext.Session.SetString("token", token);
+            }
             return View();
         }
 
