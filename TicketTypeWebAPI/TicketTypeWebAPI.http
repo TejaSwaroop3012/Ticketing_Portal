@@ -7,39 +7,37 @@ Accept: application/json
 POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType/
 Content-Type: application/json
 {
-    "ticketTypeId": 2,
-    "ticketTypeName": "Hardware Issue",
+    "ticketTypeId": 5,
+    "ticketTypeName": "System login error",
     "assignedToEmpId": 1,
-    "priorityId": 1,
-    "assignedToEmp": null,
-    "priority": null
- }
+    "priorityId": 1   
+  }
 ###
 POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType/Employee
 Content-Type : application/json
 {
-  "empId": 2
+  "empId": 3
 }
 ###
 POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType/TicketPriority
 Content-Type : application/json
 {
-  "priorityId": 2
+  "priorityId": 3
 }
 ###
-POST {{TicketTypeWebAPI_HostAddress}}/api/TicketType
+PUT {{TicketTypeWebAPI_HostAddress}}/api/TicketType/5
 Content-Type: application/json
 {
-    "ticketTypeId": 2,
-    "ticketTypeName": "External HardWare Problem",
-    "assignedToEmpId": 1,
-    "priorityId": 1,
+    "ticketTypeId": 5,
+    "ticketTypeName": "System login error",
+    "assignedToEmpId": 2,
+    "priorityId": 2,
     "assignedToEmp": null,
     "priority": null
- }
+  }
 
 ###
-GET {{TicketTypeWebAPI_HostAddress}}/api/TicketType/ByEmployeeId/1
+GET {{TicketTypeWebAPI_HostAddress}}/api/TicketType/ByEmployeeId/2
 Accept: application/json
 
 ###
@@ -49,23 +47,14 @@ Accept: application/json
 ###
 GET {{TicketTypeWebAPI_HostAddress}}/api/TicketType/ByPriority/2
 Accept: application/json
-
 ###
-PUT  {{TicketTypeWebAPI_HostAddress}}/api/TicketType/2
-Content-Type: application/json
-{
-  
-  "ticketTypeId": 1,
-  "ticketTypeName": "Application error",
-  "assignedToEmpId": 1,
-  "priorityId": 1
-}
 
-###
+
 DELETE {{TicketTypeWebAPI_HostAddress}}/api/TicketType/FromTicketType/1
 Accept: application/json
+
 ###
-DELETE {{TicketTypeWebAPI_HostAddress}}/api/TicketType/FromEmployee/1
+DELETE {{TicketTypeWebAPI_HostAddress}}/api/TicketType/FromEmployee/2
 Accept: application/json
 
 ###

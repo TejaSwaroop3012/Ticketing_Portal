@@ -84,6 +84,8 @@ namespace TicketTypeWebAPI.Controllers
             try
             {
                 await ticket.InsertTicketType(ticketType);
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                await client.PostAsJsonAsync("TicketType", new { TicketTypeId=ticketType.TicketTypeId });
                 return Created($"api/TicketType/{ticketType.TicketTypeId}", ticketType);
             }
             catch (TicketTypeException ex)
@@ -135,8 +137,17 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                await ticket.DeleteTicketType(TypeId);
-                return Ok();
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                var response = await client.DeleteAsync($"TicketType/{TypeId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    await ticket.DeleteTicketType(TypeId);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Cannot delete");
+                }
             }
             catch (TicketTypeException ex)
             {
