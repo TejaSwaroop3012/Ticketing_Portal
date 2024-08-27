@@ -120,7 +120,7 @@ namespace TicketWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpPut]
+        [HttpPut("{ticketId}")]
         public async Task<ActionResult> Edit(int ticketId, Ticket ticket)
         {
             try
@@ -134,7 +134,7 @@ namespace TicketWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpDelete]
+        [HttpDelete("{ticketId}")]
         public async Task<ActionResult> Delete1(int ticketId)
         {
             try
@@ -147,7 +147,7 @@ namespace TicketWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpDelete("Employee")]
+        [HttpDelete("Employee/{empId}")]
         public async Task<ActionResult> Delete2(int empId)
         {
             try
@@ -160,7 +160,7 @@ namespace TicketWebAPI.Controllers
                 return BadRequest(ex.Message);
             }
         }
-        [HttpDelete("TicketType")]
+        [HttpDelete("TicketType/{typeId}")]
         public async Task<ActionResult> Delete3(int typeId)
         {
             try

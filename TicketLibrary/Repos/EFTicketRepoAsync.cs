@@ -56,7 +56,7 @@ namespace TicketLibrary.Repos
             Employee emp = await GetEmployeeById(empId);
             try
             {
-                ctx.Remove(emp);
+                ctx.Employees.Remove(emp);
                 await ctx.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -67,10 +67,10 @@ namespace TicketLibrary.Repos
 
         public async Task DeleteTicket(int ticketId)
         {
-            Task<Ticket> ticket = GetTicketById(ticketId);
+            Ticket ticket = await GetTicketById(ticketId);
             try
             {
-                ctx.Remove(ticket);
+                ctx.Tickets.Remove(ticket);
                 await ctx.SaveChangesAsync();
             }
             catch (Exception ex)
@@ -84,7 +84,7 @@ namespace TicketLibrary.Repos
             TicketType type = await GetTicketTypeById(typeId);
             try
             {
-                ctx.Remove(type);
+                ctx.TicketTypes.Remove(type);
                 await ctx.SaveChangesAsync();
             }
             catch (Exception ex)

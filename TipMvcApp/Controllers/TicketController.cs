@@ -136,6 +136,7 @@ namespace TipMvcApp.Controllers
 
 
         // GET: TicketController/Delete/5
+        [Route("Ticket/Delete/{ticketId}")]
         public async Task<ActionResult> Delete(int ticketId)
         {
             Ticket ticket = await client.GetFromJsonAsync<Ticket>($"GetTicketByTicketId/{ticketId}");
@@ -145,6 +146,7 @@ namespace TipMvcApp.Controllers
         // POST: TicketController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Route("Ticket/Delete/{ticketId}")]
         public async Task<ActionResult> Delete(int ticketId, IFormCollection collection)
         {
             try
