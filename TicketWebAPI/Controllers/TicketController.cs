@@ -86,7 +86,8 @@ namespace TicketWebAPI.Controllers
             try
             {
                 await ticketRepoAsync.InsertTicket(ticket);
-
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
+                await client.PostAsJsonAsync("Ticket", new { TicketId = ticket.TicketId});
                 return Created($"api/Ticket/{ticket.TicketId}", ticket);
             }
             catch (TicketException ex)
@@ -137,15 +138,18 @@ namespace TicketWebAPI.Controllers
         [HttpDelete("{ticketId}")]
         public async Task<ActionResult> Delete1(int ticketId)
         {
-            try
-            {
-                await ticketRepoAsync.DeleteTicket(ticketId);
-                return Ok();
-            }
-            catch (TicketException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
+                var response1 = await client2.DeleteAsync("DelTicket/" + ticketId);
+                if (response1.IsSuccessStatusCode)
+                {
+                    await ticketRepoAsync.DeleteTicket(ticketId);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest("Cannot delete the Ticket");
+                }
         }
         [HttpDelete("Employee/{empId}")]
         public async Task<ActionResult> Delete2(int empId)
