@@ -27,14 +27,14 @@ public partial class TicketFollowUpDBContext : DbContext
     {
         modelBuilder.Entity<Ticket>(entity =>
         {
-            entity.HasKey(e => e.TicketId).HasName("PK__Ticket__712CC60710669A6E");
+            entity.HasKey(e => e.TicketId).HasName("PK__Ticket__712CC607217E906A");
 
             entity.ToTable("Ticket");
         });
 
         modelBuilder.Entity<TicketFollowup>(entity =>
         {
-            entity.HasKey(e => new { e.TicketId, e.SrNo }).HasName("PK__TicketFo__AD168B3D7B8A3A33");
+            entity.HasKey(e => new { e.TicketId, e.SrNo }).HasName("PK__TicketFo__AD168B3D54D07DB1");
 
             entity.ToTable("TicketFollowup");
 
@@ -49,7 +49,7 @@ public partial class TicketFollowUpDBContext : DbContext
             entity.HasOne(d => d.Ticket).WithMany(p => p.TicketFollowups)
                 .HasForeignKey(d => d.TicketId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__TicketFol__Ticke__3D5E1FD2");
+                .HasConstraintName("FK__TicketFol__Ticke__5DCAEF64");
         });
 
         OnModelCreatingPartial(modelBuilder);
