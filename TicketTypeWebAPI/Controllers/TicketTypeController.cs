@@ -146,6 +146,18 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
+                string userName = "Suresh";
+                string role = "admin";
+                string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                client2.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response1 = await client2.DeleteAsync("FromEmployee/" + empId);
+                HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                client2.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
                 var response = await client.DeleteAsync($"TicketType/{TypeId}");
                 if (response.IsSuccessStatusCode)
