@@ -101,6 +101,20 @@ namespace EmployeeWebAPI.Controllers
                 }
                 else
                 {
+                    if (response1.IsSuccessStatusCode)
+                    {
+                        HttpClient client4 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                        client4.DefaultRequestHeaders.Authorization = new 
+                                        System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                        await client4.PostAsJsonAsync("Employee/", new {EmpId = empId});
+                    }
+                    if (response2.IsSuccessStatusCode)
+                    {
+                        HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                        client5.DefaultRequestHeaders.Authorization = new
+                                        System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                        await client5.PostAsJsonAsync("Employee/", new { EmpId = empId });
+                    }
                     return BadRequest("Cannot delete the Employee");
                 }
             }
