@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<TipMvcApp.Models.Ticket>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ByTypeId";
 }
 
-<h1>Index</h1>
+<h1>ByTypeId</h1>
 
 <p>
     <a type="submit" class="btn btn-primary" asp-action="Create">Create New</a>
@@ -27,9 +27,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -51,17 +48,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { ticketId = item.TicketId }) |
-                    @Html.ActionLink("Details", "Details", new { ticketId = item.TicketId }) |
-                    @Html.ActionLink("Delete", "Delete", new { ticketId = item.TicketId }) |
-                    @Html.ActionLink("ByEmpId", "ByEmpId", new { empId = item.EmpId}) |
-                    @Html.ActionLink("ByTypeId", "ByTypeId", new { typeId = item.TicketTypeId }) |
-                    @Html.ActionLink("ByEmpIdandTypeId", "ByEmpIdandTypeId", new { empId = item.EmpId, typeId = item.TicketTypeId })
-                </td>
+                @Html.ActionLink("Edit", "Edit", new {typeId=item.TicketTypeId }) |
+                    @Html.ActionLink("Details", "Details", new { typeId = item.TicketTypeId }) |
+                    @Html.ActionLink("Delete", "Delete", new { typeId = item.TicketTypeId })
+            </td>
         </tr>
 }
     </tbody>

@@ -27,7 +27,7 @@ Accept: application/json
 POST {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp/Ticket
 Content-Type: application/json
 {
-"ticketId" : 0
+"ticketId" : 2
 }
 ###
 

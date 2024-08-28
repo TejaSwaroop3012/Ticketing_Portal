@@ -33,7 +33,7 @@ namespace TipMvcApp.Controllers
             }
         }
         // GET: EmployeeController/Create
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +47,8 @@ namespace TipMvcApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return View();
                 await client.PostAsJsonAsync<Employee>("", employee);
                 return RedirectToAction(nameof(Index));
             }

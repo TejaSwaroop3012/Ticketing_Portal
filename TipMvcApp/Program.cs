@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TipMvcApp.Data;
+using TipMvcApp.Filters;
 
 namespace TipMvcApp
 {
@@ -20,10 +21,10 @@ namespace TipMvcApp
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
-            /*builder.Services.AddMvc(options =>
+            builder.Services.AddMvc(options =>
             {
                 options.Filters.Add(new LogActionFilterAttribute());
-            });*/
+            });
 
             builder.Services.AddSession();
 

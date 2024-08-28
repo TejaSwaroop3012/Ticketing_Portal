@@ -25,7 +25,7 @@ namespace TipMvcApp.Controllers
             return View(ticketPriority);
         }
         // GET: TicketPriorityController/Create
-        [Authorize(Roles = "Admin")]
+       [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
