@@ -47,6 +47,8 @@ namespace TipMvcApp.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return View();
                 await client.PostAsJsonAsync<Employee>("", employee);
                 return RedirectToAction(nameof(Index));
             }

@@ -16,6 +16,7 @@ namespace TipMvcApp.Controllers
             client.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             List<TicketFollowUp> ticketFollowUps = await client.GetFromJsonAsync<List<TicketFollowUp>>("");
+            srno = ticketFollowUps.Count();
             return View(ticketFollowUps);
         }
         public async Task<ActionResult> ByStatus(string status)
@@ -43,9 +44,12 @@ namespace TipMvcApp.Controllers
         }
 
         // GET: TicketFollowUpController/Create
+        static int srno;
         public ActionResult Create()
         {
-            return View();
+            TicketFollowUp ticketFollowUp = new TicketFollowUp();
+            ticketFollowUp.SrNo = srno + 1;
+            return View(ticketFollowUp);
         }
 
         // POST: TicketFollowUpController/Create
@@ -53,15 +57,11 @@ namespace TipMvcApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(TicketFollowUp ticketFollowUp)
         {
-            try
-            {
+            
+                if (!ModelState.IsValid)
+                    return View();
                 await client.PostAsJsonAsync<TicketFollowUp>("",ticketFollowUp);
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: TicketFollowUpController/Edit/5

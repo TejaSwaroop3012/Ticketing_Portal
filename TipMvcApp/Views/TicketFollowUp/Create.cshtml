@@ -14,8 +14,12 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="TicketId" class="control-label"></label>
-                <input asp-for="TicketId" class="form-control" />
-                <span asp-validation-for="TicketId" class="text-danger"></span>
+                <select asp-for="TicketId" class ="form-control">
+                    @foreach(SelectListItem ticketlist in await Helper.GetAllTickets())
+                    {
+                        <option value="@ticketlist.Value">@ticketlist.Text</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="SrNo" class="control-label"></label>
@@ -24,8 +28,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <select asp-for="Status" class="form-control">
+                    <option value="Batched">Batched</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Remarks" class="control-label"></label>
