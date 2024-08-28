@@ -28,8 +28,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <select asp-for="Status" class="form-control">
+                    <option value="Batched">Batched</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Remarks" class="control-label"></label>
