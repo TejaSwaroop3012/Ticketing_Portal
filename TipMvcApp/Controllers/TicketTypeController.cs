@@ -34,7 +34,7 @@ namespace TipMvcApp.Controllers
         }
 
         // GET: TicketTypeController/Create
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -43,7 +43,7 @@ namespace TipMvcApp.Controllers
         // POST: TicketTypeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(TicketType ticketType)
         {
             try
@@ -59,7 +59,7 @@ namespace TipMvcApp.Controllers
 
         // GET: TicketTypeController/Edit/5
         [Route("TicketType/Edit/{TypeId}")]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int TypeId)
         {
             TicketType ticketType = await client.GetFromJsonAsync<TicketType>($"ByTypeId/{TypeId}");
@@ -70,7 +70,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("TicketType/Edit/{TypeId}")]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int TypeId, TicketType ticketType)
         {
             try
@@ -86,7 +86,7 @@ namespace TipMvcApp.Controllers
 
         // GET: TicketTypeController/Delete/5
         [Route("TicketType/Delete/{TypeId}")]
-       // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int TypeId)
         {
             TicketType ticketType = await client.GetFromJsonAsync<TicketType>("ByTypeId/" + TypeId);
@@ -97,7 +97,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("TicketType/Delete/{TypeId}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int TypeId, IFormCollection collection)
         {
             try

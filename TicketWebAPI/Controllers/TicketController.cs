@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Sockets;
 using TicketLibrary.Models;
@@ -8,6 +9,7 @@ namespace TicketWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TicketController : ControllerBase
     {
 
@@ -41,8 +43,21 @@ namespace TicketWebAPI.Controllers
             List<Ticket> tickets = await ticketRepoAsync.GetTicketByTicketTypeIdandEmployeeId(empId, tyepId);
             return Ok(tickets);
         }
+        [HttpGet("GetTicketByTicketId/{ticketId}")]
+        public async Task<ActionResult> Details(int ticketId)
+        {
+            try
+            {
+                Ticket ticket = await ticketRepoAsync.GetTicketById(ticketId);
+                return Ok(ticket);
+            }
+            catch (TicketException ex)
+            {
+                return NotFound("No such ticket id");
+            }
+        }
         [HttpGet("GetEmployeeByEmpId/{empId}")]
-        public async Task<ActionResult> Details(int empId)
+        public async Task<ActionResult> GetEmployeeByEmpId(int empId)
         {
             try
             {
@@ -67,27 +82,22 @@ namespace TicketWebAPI.Controllers
                 return NotFound("No such type id");
             }
         }
-        [HttpGet("GetTicketByTicketId/{ticketId}")]
-        public async Task<ActionResult> GetTicketByTicketId(int ticketId)
-        {
-            try
-            {
-                Ticket ticket = await ticketRepoAsync.GetTicketById(ticketId);
-                return Ok(ticket);
-            }
-            catch (TicketException ex)
-            {
-                return NotFound("No such ticket id");
-            }
-        }
+        
         [HttpPost]
         public async Task<ActionResult> Create(Ticket ticket)
         {
             try
             {
                 await ticketRepoAsync.AddTicket(ticket);
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
-                await client.PostAsJsonAsync("Ticket", new { TicketId = ticket.TicketId});
+                string userName = "Suresh";
+                string role = "admin";
+                string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketFollowUp/") };
+                client2.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                await client2.PostAsJsonAsync("Ticket", new { TicketId = ticket.TicketId });
                 return Created($"api/Ticket/{ticket.TicketId}", ticket);
             }
             catch (TicketException ex)

@@ -10,7 +10,7 @@ namespace EmployeeWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         IEmployeeRepoAsync employeeRepository;
@@ -43,10 +43,19 @@ namespace EmployeeWebAPI.Controllers
             try
             {
                 await employeeRepository.InsertEmployee(employee);
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
-                await client1.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                string userName = "Suresh";
+                string role = "admin";
+                string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                client2.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 await client2.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
+                HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                client3.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                await client3.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
                 return Created($"api/Employee/{employee.EmpId}", employee);
             }
             catch(EmployeeException ex)
@@ -72,10 +81,19 @@ namespace EmployeeWebAPI.Controllers
         {
             try
             {
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
-                var response1=await client.DeleteAsync("FromEmployee/" + empId );
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
-                var response2=await client1.DeleteAsync("Employee/" + empId );
+                string userName = "Suresh";
+                string role = "admin";
+                string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                client2.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response1=await client2.DeleteAsync("FromEmployee/" + empId );
+                HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                client2.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response2=await client3.DeleteAsync("Employee/" + empId );
                 if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
                 {
                     await employeeRepository.DeleteEmployee(empId);

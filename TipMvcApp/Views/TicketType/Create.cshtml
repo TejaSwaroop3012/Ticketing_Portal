@@ -24,13 +24,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="AssignedToEmpId" class="control-label"></label>
-                <input asp-for="AssignedToEmpId" class="form-control" />
-                <span asp-validation-for="AssignedToEmpId" class="text-danger"></span>
+                <select asp-for="AssignedToEmpId" class="form-control">
+                    @foreach (SelectListItem emplist in await Helper.GetAllEmployees())
+                    {
+                        <option value="@emplist.Value">@emplist.Text</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="PriorityId" class="control-label"></label>
-                <input asp-for="PriorityId" class="form-control" />
-                <span asp-validation-for="PriorityId" class="text-danger"></span>
+                <select asp-for="PriorityId" class="form-control">
+                    @foreach (SelectListItem prilist in await Helper.GetAllPriorities())
+                    {
+                        <option value="@prilist.Value">@prilist.Text</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

@@ -9,30 +9,43 @@ namespace TipMvcApp.Controllers
     public class TicketController : Controller
     {
         static HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
-        // GET: TicketController
         public async Task<ActionResult> Index()
         {
-            List<Ticket> tickets = await client.GetFromJsonAsync <List<Ticket>>("");
             string token = HttpContext.Session.GetString("token");
             client.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            List<Ticket> tickets = await client.GetFromJsonAsync<List<Ticket>>("");
             return View(tickets);
         }
-        // GET: TicketController/Details/5
+        public async Task<ActionResult> ByEmpId(int empId)
+        {
+            List<Ticket> tickets = await client.GetFromJsonAsync<List<Ticket>>($"GetAllByEmpId/{empId}");
+            return View(tickets);
+        }
+        public async Task<ActionResult> ByTypeId(int typeId)
+        {
+            List<Ticket> tickets = await client.GetFromJsonAsync<List<Ticket>>($"GetAllByTypeId/{typeId}");
+            return View(tickets);
+        }
+        public async Task<ActionResult> ByEmpIdandTypeId(int empId, int typeId)
+        {
+            List<Ticket> tickets=await client.GetFromJsonAsync<List<Ticket>>($"GetAllByEmpIdandTypeId/{empId}/{typeId}");
+            return View(tickets);
+        }
         public async Task<ActionResult> Details(int ticketId)
         {
             Ticket ticket = await client.GetFromJsonAsync<Ticket>($"GetTicketByTicketId/{ticketId}");
             return View(ticket);
         }
-        // GET: TicketController/Create
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TicketController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(Ticket ticket)
         {
             try
@@ -47,7 +60,6 @@ namespace TipMvcApp.Controllers
         }
         
 
-        // GET: TicketController/Edit/5
         [Route("Ticket/Edit/{ticketId}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int ticketId)
@@ -56,7 +68,6 @@ namespace TipMvcApp.Controllers
             return View(ticket1);
         }
 
-        // POST: TicketController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Ticket/Edit/{ticketId}")]
@@ -73,9 +84,6 @@ namespace TipMvcApp.Controllers
                 return View();
             }
         }
-
-
-        // GET: TicketController/Delete/5
         [Route("Ticket/Delete/{ticketId}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int ticketId)
@@ -83,8 +91,6 @@ namespace TipMvcApp.Controllers
             Ticket ticket = await client.GetFromJsonAsync<Ticket>($"GetTicketByTicketId/{ticketId}");
             return View(ticket);
         }
-
-        // POST: TicketController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("Ticket/Delete/{ticketId}")]
