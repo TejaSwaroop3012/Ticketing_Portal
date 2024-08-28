@@ -148,8 +148,14 @@ namespace TicketWebAPI.Controllers
         [HttpDelete("{ticketId}")]
         public async Task<ActionResult> Delete(int ticketId)
         {
-            
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
+            string userName = "Suresh";
+            string role = "admin";
+            string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+            HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+            string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
+            HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
+            client2.DefaultRequestHeaders.Authorization = new
+                System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response1 = await client2.DeleteAsync("DelTicket/" + ticketId);
                 if (response1.IsSuccessStatusCode)
                 {

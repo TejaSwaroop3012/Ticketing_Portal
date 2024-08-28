@@ -19,13 +19,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="EmpId" class="control-label"></label>
-                <input asp-for="EmpId" class="form-control" />
-                <span asp-validation-for="EmpId" class="text-danger"></span>
+                <select asp-for="EmpId" class="form-control">
+                    @foreach (SelectListItem emplist in await Helper.GetAllEmployees())
+                    {
+                        <option value="@emplist.Value">@emplist.Text</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="TicketTypeId" class="control-label"></label>
-                <input asp-for="TicketTypeId" class="form-control" />
-                <span asp-validation-for="TicketTypeId" class="text-danger"></span>
+                <select asp-for="TicketTypeId" class="form-control">
+                    @foreach (SelectListItem typelist in await Helper.GetAllTicketTypes())
+                    {
+                        <option value="@typelist.Value">@typelist.Text</option>
+                    }
+                </select>
             </div>
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
