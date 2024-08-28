@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using TicketLibrary.Repos;
 
 namespace TicketWebAPI
@@ -16,6 +18,26 @@ namespace TicketWebAPI
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddScoped<ITicketRepoAsync, EFTicketRepoAsync>();
+            builder.Services.AddAuthentication(Options =>
+            {
+                Options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                Options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                Options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(Options =>
+            {
+                Options.SaveToken = true;
+                Options.RequireHttpsMetadata = false;
+                Options.TokenValidationParameters = new
+                            Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = "http://www.allcloud.in",
+                    ValidIssuer = "http://www.allcloud.in",
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                        "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son"))
+                };
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -25,6 +47,7 @@ namespace TicketWebAPI
                 app.UseSwaggerUI();
             }
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

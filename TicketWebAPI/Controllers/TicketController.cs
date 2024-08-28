@@ -18,31 +18,31 @@ namespace TicketWebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index1()
+        public async Task<ActionResult> Index()
         {
             List<Ticket> tickets = await ticketRepoAsync.GetAllTickets();
             return Ok(tickets);
         }
         [HttpGet("GetAllByEmpId/{empId}")]
-        public async Task<ActionResult> Index2(int empId)
+        public async Task<ActionResult> GetAllByEmpId(int empId)
         {
             List<Ticket> tickets = await ticketRepoAsync.GetTicketByEmpId(empId);
             return Ok(tickets);
         }
         [HttpGet("GetAllByTypeId/{typeId}")]
-        public async Task<ActionResult> Index3(int typeId)
+        public async Task<ActionResult> GetAllByTypeId(int typeId)
         {
             List<Ticket> tickets = await ticketRepoAsync.GetTicketByTicketTypeId(typeId);
             return Ok(tickets);
         }
         [HttpGet("GetAllByEmpIdandTypeId/{empId}/{tyepId}")]
-        public async Task<ActionResult> Index4(int empId, int tyepId)
+        public async Task<ActionResult> GetAllByEmpIdandTypeId(int empId, int tyepId)
         {
             List<Ticket> tickets = await ticketRepoAsync.GetTicketByTicketTypeIdandEmployeeId(empId, tyepId);
             return Ok(tickets);
         }
         [HttpGet("GetEmployeeByEmpId/{empId}")]
-        public async Task<ActionResult> Details1(int empId)
+        public async Task<ActionResult> Details(int empId)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace TicketWebAPI.Controllers
             }
         }
         [HttpGet("GetTicketTypeByTicketTypeId/{typeId}")]
-        public async Task<ActionResult> Details2(int typeId)
+        public async Task<ActionResult> GetTicketTypeByTicketTypeId(int typeId)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace TicketWebAPI.Controllers
             }
         }
         [HttpGet("GetTicketByTicketId/{ticketId}")]
-        public async Task<ActionResult> Details3(int ticketId)
+        public async Task<ActionResult> GetTicketByTicketId(int ticketId)
         {
             try
             {
@@ -81,11 +81,11 @@ namespace TicketWebAPI.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult> Create1(Ticket ticket)
+        public async Task<ActionResult> Create(Ticket ticket)
         {
             try
             {
-                await ticketRepoAsync.InsertTicket(ticket);
+                await ticketRepoAsync.AddTicket(ticket);
                 HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
                 await client.PostAsJsonAsync("Ticket", new { TicketId = ticket.TicketId});
                 return Created($"api/Ticket/{ticket.TicketId}", ticket);
@@ -96,7 +96,7 @@ namespace TicketWebAPI.Controllers
             }
         }
         [HttpPost("Employee")]
-        public async Task<ActionResult> Create2(Employee employee)
+        public async Task<ActionResult> CreateEmployee(Employee employee)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace TicketWebAPI.Controllers
             }
         }
         [HttpPost("TicketType")]
-        public async Task<ActionResult> Create3(TicketType type)
+        public async Task<ActionResult> CreateTicketType(TicketType type)
         {
             try
             {
@@ -136,7 +136,7 @@ namespace TicketWebAPI.Controllers
             }
         }
         [HttpDelete("{ticketId}")]
-        public async Task<ActionResult> Delete1(int ticketId)
+        public async Task<ActionResult> Delete(int ticketId)
         {
             
                 HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
@@ -152,7 +152,7 @@ namespace TicketWebAPI.Controllers
                 }
         }
         [HttpDelete("Employee/{empId}")]
-        public async Task<ActionResult> Delete2(int empId)
+        public async Task<ActionResult> DeleteEmployee(int empId)
         {
             try
             {
@@ -165,7 +165,7 @@ namespace TicketWebAPI.Controllers
             }
         }
         [HttpDelete("TicketType/{typeId}")]
-        public async Task<ActionResult> Delete3(int typeId)
+        public async Task<ActionResult> DeleteTicketType(int typeId)
         {
             try
             {
