@@ -58,6 +58,9 @@
                     @Html.ActionLink("Edit", "Edit", new { ticketId = item.TicketId }) |
                     @Html.ActionLink("Details", "Details", new { ticketId = item.TicketId }) |
                     @Html.ActionLink("Delete", "Delete", new { ticketId = item.TicketId }) |
+                    @Html.ActionLink("ByEmpId", "ByEmpId", new { empId = item.EmpId}) |
+                    @Html.ActionLink("ByTypeId", "ByTypeId", new { typeId = item.TicketTypeId }) |
+                    @Html.ActionLink("ByEmpIdandTypeId", "ByEmpIdandTypeId", new { empId = item.EmpId, typeId = item.TicketTypeId })
                 </td>
         </tr>
 }
