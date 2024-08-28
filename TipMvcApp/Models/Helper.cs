@@ -6,6 +6,8 @@ namespace TipMvcApp.Models
     {
         static HttpClient clientEmployee = new HttpClient { BaseAddress = new Uri("http://localhost:5292/api/Employee/") };
         static HttpClient clientPriority = new HttpClient { BaseAddress = new Uri("http://localhost:5133/api/TicketPriority/") };
+        static HttpClient clientType = new HttpClient { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+        static HttpClient clientTicket = new HttpClient { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
         public static async Task<List<SelectListItem>> GetAllEmployees()
         {
             string userName = "Suresh";
@@ -40,6 +42,42 @@ namespace TipMvcApp.Models
                 prilist.Add(new SelectListItem { Text = $"{p.PriorityId}", Value = $"{p.PriorityId}" });
             }
             return prilist;
+        }
+
+        public static async Task<List<SelectListItem>> GetAllTicketTypes()
+        {
+            string userName = "Suresh";
+            string role = "admin";
+            string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+            string token = await client.GetStringAsync($"{userName}/{role}/{secretKey}");
+            clientType.DefaultRequestHeaders.Authorization = new
+                  System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            List<SelectListItem> typelist = new List<SelectListItem>();
+            List<TicketType> ticketTypes = await clientType.GetFromJsonAsync<List<TicketType>>("");
+            foreach (TicketType tt in ticketTypes)
+            {
+                typelist.Add(new SelectListItem { Text = $"{tt.TicketTypeId}", Value = $"{tt.TicketTypeId}" });
+            }
+            return typelist;
+        }
+
+        public static async Task<List<SelectListItem>> GetAllTickets()
+        {
+            string userName = "Suresh";
+            string role = "admin";
+            string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+            string token = await client.GetStringAsync($"{userName}/{role}/{secretKey}");
+            clientTicket.DefaultRequestHeaders.Authorization = new
+                  System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+            List<SelectListItem> ticketlist = new List<SelectListItem>();
+            List<Ticket> tickets = await clientTicket.GetFromJsonAsync<List<Ticket>>("");
+            foreach (Ticket t in tickets)
+            {
+                ticketlist.Add(new SelectListItem { Text = $"{t.TicketId}", Value = $"{t.TicketId}" });
+            }
+            return ticketlist;
         }
 
     }
