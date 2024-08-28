@@ -9,7 +9,7 @@ namespace TicketPriorityWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+  //  [Authorize]
     public class TicketPriorityController : ControllerBase
     {
         ITicketPriorityRepoAsync ticketPriorityRepo;

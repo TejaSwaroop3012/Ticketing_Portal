@@ -11,7 +11,7 @@ namespace TicketTypeWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TicketTypeController : ControllerBase
     {
         ITicketTypeRepoAsync ticket;

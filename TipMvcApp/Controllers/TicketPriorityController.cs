@@ -25,7 +25,7 @@ namespace TipMvcApp.Controllers
             return View(ticketPriority);
         }
         // GET: TicketPriorityController/Create
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -33,7 +33,7 @@ namespace TipMvcApp.Controllers
         // POST: TicketPriorityController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(TicketPriority ticketPriority)
         {
             try
@@ -48,7 +48,7 @@ namespace TipMvcApp.Controllers
         }
         // GET: TicketPriorityController/Edit/5
         [Route("TicketPriority/Edit/{priorityId}")]
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int priorityId)
         {
             TicketPriority ticketPriority = await client.GetFromJsonAsync<TicketPriority>($"{priorityId}");
@@ -58,7 +58,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("TicketPriority/Edit/{priorityId}")]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int priorityId, TicketPriority ticketPriority)
         {
             try
@@ -74,7 +74,7 @@ namespace TipMvcApp.Controllers
 
         // GET: TicketPriorityController/Delete/5
         [Route("TicketPriority/Delete/{priorityId}")]
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int priorityId)
         {
             TicketPriority ticketPriority = await client.GetFromJsonAsync<TicketPriority>(""+ priorityId);
@@ -84,7 +84,7 @@ namespace TipMvcApp.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("TicketPriority/Delete/{priorityId}")]
-        [Authorize(Roles = "Admin")]
+       // [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int priorityId, IFormCollection collection)
         {
             try
