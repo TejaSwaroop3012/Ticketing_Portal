@@ -20,14 +20,14 @@ namespace TicketTypeWebAPI.Controllers
             ticket = ticketType;
         }
         [HttpGet]
-        public async Task<ActionResult> Index1()
+        public async Task<ActionResult> Index()
         {          
                 List<TicketType> ticketTypes = await ticket.GetAllTicketType();
                 return Ok(ticketTypes);           
         }
 
         [HttpGet("ByEmployeeId/{EmpId}")]
-        public async Task<ActionResult> Index2(int EmpId)
+        public async Task<ActionResult> ByEmployeeId(int EmpId)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace TicketTypeWebAPI.Controllers
         }
         
         [HttpGet("ByTypeId/{typdId}")]
-        public async Task<ActionResult> Details1(int typdId)
+        public async Task<ActionResult> Details(int typdId)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace TicketTypeWebAPI.Controllers
         }
 
         [HttpGet("ByEmployee/{empId}")]
-        public async Task<ActionResult> Details2(int empId)
+        public async Task<ActionResult> DetailsFromEmployee(int empId)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace TicketTypeWebAPI.Controllers
             }
         }
         [HttpGet("ByPriority/{priorityId}")]
-        public async Task<ActionResult> Details3(int priorityId)
+        public async Task<ActionResult> ByPriority(int priorityId)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace TicketTypeWebAPI.Controllers
             }
         }
         [HttpPost]
-        public async Task<ActionResult> Insert1(TicketType ticketType)
+        public async Task<ActionResult> Insert(TicketType ticketType)
         {
             try
             {
@@ -96,7 +96,7 @@ namespace TicketTypeWebAPI.Controllers
             }
         }
         [HttpPost("Employee")]
-        public async Task<ActionResult> Insert2(Employee employee)
+        public async Task<ActionResult> InsertEmployee(Employee employee)
         {
             try
             {
@@ -109,7 +109,7 @@ namespace TicketTypeWebAPI.Controllers
             }
         }
         [HttpPost("TicketPriority")]
-        public async Task<ActionResult> Insert3(TicketPriority ticketPriority)
+        public async Task<ActionResult> InsertPriorityId(TicketPriority ticketPriority)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace TicketTypeWebAPI.Controllers
             }
         }
         [HttpDelete("FromTicketType/{TypeId}")]
-        public async Task<ActionResult> Delete1(int TypeId)
+        public async Task<ActionResult> Delete(int TypeId)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace TicketTypeWebAPI.Controllers
             }
         }
         [HttpDelete("FromEmployee/{EmpId}")]
-        public async Task<ActionResult> Delete2(int EmpId)
+        public async Task<ActionResult> DeleteFromEmployee(int EmpId)
         {
             try
             {
@@ -170,7 +170,7 @@ namespace TicketTypeWebAPI.Controllers
             }
         }
         [HttpDelete("FromPriority/{priorityId}")]
-        public async Task<ActionResult> Delete3(int priorityId)
+        public async Task<ActionResult> DeleteFromPriority(int priorityId)
         {
             try
             {

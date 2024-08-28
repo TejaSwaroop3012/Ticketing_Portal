@@ -10,32 +10,13 @@
     }
 
     .hero-section {
-        position: relative;
-        background: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2FAllCloudIndia%2F&psig=AOvVaw2LZx_8ugOYA4iRt3bbWMDl&ust=1724841330561000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIiu6er8lIgDFQAAAAAdAAAAABAEhttps://media-exp1.licdn.com/dms/image/C510BAQExIHFQvmGQYg/company-logo_200_200/0?e=2159024400&v=beta&t=L7OalUNQEYNxjHheTKsboy8fra8HeRp2V4Ul2Yf0cQw") no-repeat center center;
-        background-size: cover;
+        background: linear-gradient(135deg, #0056b3, #007bff);
         color: white;
         padding: 60px 0;
         text-align: center;
         border-radius: 0 0 50px 50px;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
-
-        .hero-section::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay to ensure text readability */
-            border-radius: 0 0 50px 50px;
-        }
-
-        .hero-section h1,
-        .hero-section p {
-            position: relative;
-            z-index: 1;
-        }
 
         .hero-section h1 {
             font-size: 3.5rem;
@@ -50,6 +31,7 @@
 
     .card-container {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
         margin-top: -50px;
@@ -57,7 +39,8 @@
 
     .card {
         flex: 1;
-        max-width: 350px;
+        min-width: 250px;
+        max-width: 300px;
         background-color: #ffffff;
         border: none;
         border-radius: 15px;
@@ -84,6 +67,13 @@
     .card-text {
         font-size: 1rem;
         color: #555;
+        margin-bottom: 20px;
+    }
+
+    .btn-outline-primary {
+        font-size: 0.9rem;
+        font-weight: 600;
+        padding: 10px 20px;
     }
 
     .footer {
@@ -111,18 +101,35 @@
         <div class="card-body">
             <h5 class="card-title">Submit a New Ticket</h5>
             <p class="card-text">Having an issue? Submit a new ticket for quick resolution.</p>
+            <a type="submit" class="btn btn-outline-primary" href="../Ticket">Ticket</a>
         </div>
     </div>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">View Your Tickets</h5>
-            <p class="card-text">Track the status of your submitted tickets.</p>
+            <h5 class="card-title">Manage Employee Profile</h5>
+            <p class="card-text">Update Employee information.</p>
+            <a type="submit" class="btn btn-outline-primary" href="../Employee"> Employee Profiles</a>
         </div>
     </div>
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Manage Your Profile</h5>
-            <p class="card-text">Update your contact information and preferences.</p>
+            <h5 class="card-title">Follow Up Tickets</h5>
+            <p class="card-text">Follow up on the submitted tickets.</p>
+            <a type="submit" class="btn btn-outline-primary" href="../TicketFollowUp">Follow Up</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Know Different Types of Tickets</h5>
+            <p class="card-text">Know about the different types of tickets Allcloud serves.</p>
+            <a type="submit" class="btn btn-outline-primary" href="../TicketType">Ticket Type</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Know Priorities of tickets</h5>
+            <p class="card-text">Ticket priorities based on the Priority.</p>
+            <a type="submit" class="btn btn-outline-primary" href="../TicketPriority">Ticket Priority</a>
         </div>
     </div>
 </div>

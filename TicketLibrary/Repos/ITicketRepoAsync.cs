@@ -16,7 +16,7 @@ namespace TicketLibrary.Repos
         Task<TicketType> GetTicketTypeById(int tyepId);  //Details2
         Task<List<Ticket>> GetTicketByTicketTypeIdandEmployeeId(int empId, int typeId); //Index4
         Task<Ticket> GetTicketById(int ticketId); //Details3
-        Task InsertTicket(Ticket ticket);  //Create1
+        Task AddTicket(Ticket ticket);  //Create1
         Task UpdateTicket(int ticketId, Ticket ticket);  //Edit
         Task DeleteTicket(int ticketId);  //Delete1
         Task AddEmployee(Employee employee);  //Create2

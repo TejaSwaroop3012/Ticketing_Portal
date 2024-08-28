@@ -38,7 +38,7 @@ namespace TicketLibrary.Repos
                 throw new TicketException(ex.Message);
             }
         }
-        public async Task InsertTicket(Ticket ticket)
+        public async Task AddTicket(Ticket ticket)
         {
             try
             {
