@@ -11,7 +11,7 @@ namespace TicketTypeWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class TicketTypeController : ControllerBase
     {
         ITicketTypeRepoAsync ticket;
@@ -86,8 +86,15 @@ namespace TicketTypeWebAPI.Controllers
             try
             {
                 await ticket.InsertTicketType(ticketType);
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
-                await client.PostAsJsonAsync("TicketType", new { TicketTypeId=ticketType.TicketTypeId });
+                string userName = "Suresh";
+                string role = "admin";
+                string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/Ticket/") };
+                client2.DefaultRequestHeaders.Authorization = new
+                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                await client2.PostAsJsonAsync("TicketType", new {TicketTypeId=ticketType.TicketTypeId});
                 return Created($"api/TicketType/{ticketType.TicketTypeId}", ticketType);
             }
             catch (TicketTypeException ex)
