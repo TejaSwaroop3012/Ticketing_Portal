@@ -53,7 +53,7 @@ namespace TicketLibrary.Repos
 
         public async Task DeleteEmployeeAsync(int empId)
         {
-            Employee emp = await GetEmployeeById(empId);
+            Employee emp = await GetEmployeeByIdAsync(empId);
             try
             {
                 ctx.Employees.Remove(emp);
@@ -67,7 +67,7 @@ namespace TicketLibrary.Repos
 
         public async Task DeleteTicketAsync(int ticketId)
         {
-            Ticket ticket = await GetTicketById(ticketId);
+            Ticket ticket = await GetTicketByIdAsync(ticketId);
             try
             {
                 ctx.Tickets.Remove(ticket);
@@ -81,7 +81,7 @@ namespace TicketLibrary.Repos
 
         public async Task DeleteTicketTypeAsync(int typeId)
         {
-            TicketType type = await GetTicketTypeById(typeId);
+            TicketType type = await GetTicketTypeByIdAsync(typeId);
             try
             {
                 ctx.TicketTypes.Remove(type);
