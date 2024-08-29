@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TipMvcApp.Models;
+using TipMvcApp.Filters;
 
 namespace TipMvcApp.Controllers
 {
     [Authorize]
     public class TicketFollowUpController : Controller
     {
-        static HttpClient client = new HttpClient { BaseAddress = new Uri(" http://localhost:5076/api/TicketFollowUp/") };
+        static HttpClient client = new HttpClient { BaseAddress = new Uri("http://localhost:5216/ticketFollowUpSvc/") };
         // GET: TicketFollowUpController
         public async Task<ActionResult> Index()
         {
@@ -57,11 +58,16 @@ namespace TipMvcApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(TicketFollowUp ticketFollowUp)
         {
-            
-                if (!ModelState.IsValid)
-                    return View();
-                await client.PostAsJsonAsync<TicketFollowUp>("",ticketFollowUp);
+            try
+            {
+                var response = await client.PostAsJsonAsync<TicketFollowUp>("", ticketFollowUp);
+                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
+            }
+            catch (HttpRequestException ex)
+            {
+                throw;
+            }
         }
 
         // GET: TicketFollowUpController/Edit/5

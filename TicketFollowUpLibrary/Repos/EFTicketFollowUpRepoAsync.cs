@@ -43,6 +43,7 @@ namespace TicketFollowUpLibrary.Repos
             {
                 Ticket t2del = await GetTicket(ticketId);
                 ctx.Tickets.Remove(t2del);
+                await ctx.SaveChangesAsync();
             }
             catch (Exception ex)
             {

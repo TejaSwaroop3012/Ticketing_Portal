@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="SrNo" class="control-label"></label>
-                <input asp-for="SrNo" class="form-control" readonly/>
+                <input asp-for="SrNo" class="form-control"/>
                 <span asp-validation-for="SrNo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -40,15 +40,13 @@
                 <span asp-validation-for="Remarks" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" /> |
+                <a type="submit" class="btn btn-outline-primary" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a type="submit" class="btn btn-outline-primary" asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
