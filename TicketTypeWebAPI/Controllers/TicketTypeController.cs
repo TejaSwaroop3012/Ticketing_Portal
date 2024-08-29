@@ -89,9 +89,9 @@ namespace TicketTypeWebAPI.Controllers
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketSvc/") };
                 client2.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 await client2.PostAsJsonAsync("TicketType", new {TicketTypeId=ticketType.TicketTypeId});
@@ -145,25 +145,26 @@ namespace TicketTypeWebAPI.Controllers
         public async Task<ActionResult> Delete(int TypeId)
         {
             try
-            {
+            { 
+
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketSvc/") };
                 client2.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await client2.DeleteAsync($"TicketType/{TypeId}");
-                if (response.IsSuccessStatusCode)
-                {
-                    await ticket.DeleteTicketType(TypeId);
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest("Cannot delete");
-                }
+                    var response = await client2.DeleteAsync($"TicketType/{TypeId}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        await ticket.DeleteTicketType(TypeId);
+                        return Ok();
+                    }
+                    else
+                    {
+                        return BadRequest("Cannot delete");
+                    }        
             }
             catch (TicketTypeException ex)
             {
