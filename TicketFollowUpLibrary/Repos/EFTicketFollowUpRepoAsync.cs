@@ -11,7 +11,7 @@ namespace TicketFollowUpLibrary.Repos
     public class EFTicketFollowUpRepoAsync : ITicketFollowUpRepoAsync
     {
         TicketFollowUpDBContext ctx = new TicketFollowUpDBContext();
-        public async Task AddTicket(Ticket ticket)
+        public async Task AddTicketAsync(Ticket ticket)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task<Ticket> GetTicket(int ticketId)
+        public async Task<Ticket> GetTicketAsync(int ticketId)
         {
             try
             {
@@ -37,11 +37,11 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task DeleteTicket(int ticketId)
+        public async Task DeleteTicketAsync(int ticketId)
         {
             try
             {
-                Ticket t2del = await GetTicket(ticketId);
+                Ticket t2del = await GetTicketAsync(ticketId);
                 ctx.Tickets.Remove(t2del);
                 await ctx.SaveChangesAsync();
             }
@@ -51,11 +51,11 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task DeleteTicketFollowUp(int ticketId, int srNo)
+        public async Task DeleteTicketFollowUpAsync(int ticketId, int srNo)
         {
             try
             {
-                TicketFollowup tf2del = await GetTicketFollowUp(ticketId, srNo);
+                TicketFollowup tf2del = await GetTicketFollowUpAsync(ticketId, srNo);
                 ctx.TicketFollowups.Remove(tf2del);
                 await ctx.SaveChangesAsync();
             }
@@ -65,13 +65,13 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task<List<TicketFollowup>> GetAllTicketFollowUps()
+        public async Task<List<TicketFollowup>> GetAllTicketFollowUpsAsync()
         {
             List<TicketFollowup> ticketFollowups = await ctx.TicketFollowups.ToListAsync();
             return ticketFollowups;
         }
 
-        public async Task<TicketFollowup> GetTicketFollowUp(int ticketId, int srNo)
+        public async Task<TicketFollowup> GetTicketFollowUpAsync(int ticketId, int srNo)
         {
             try
             {
@@ -84,7 +84,7 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task<List<TicketFollowup>> GetTicketFollowUpByDate(DateOnly updatedDate)
+        public async Task<List<TicketFollowup>> GetTicketFollowUpByDateAsync(DateOnly updatedDate)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task<List<TicketFollowup>> GetTicketFollowUpByStatus(string status)
+        public async Task<List<TicketFollowup>> GetTicketFollowUpByStatusAsync(string status)
         {
             try
             {
@@ -110,7 +110,7 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task<List<TicketFollowup>> GetTicketFollowUpByTicketId(int ticketId)
+        public async Task<List<TicketFollowup>> GetTicketFollowUpByTicketIdAsync(int ticketId)
         {
             try
             {
@@ -123,7 +123,7 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task InsertTicketFollowUp(TicketFollowup ticketFollowUp)
+        public async Task InsertTicketFollowUpAsync(TicketFollowup ticketFollowUp)
         {
             try
             {
@@ -136,11 +136,11 @@ namespace TicketFollowUpLibrary.Repos
             }
         }
 
-        public async Task UpdateTicketFollowUp(int ticketId, int srNo, TicketFollowup ticketFollowUp)
+        public async Task UpdateTicketFollowUpAsync(int ticketId, int srNo, TicketFollowup ticketFollowUp)
         {
             try
             {
-                TicketFollowup tf2edit = await GetTicketFollowUp(ticketId, srNo);
+                TicketFollowup tf2edit = await GetTicketFollowUpAsync(ticketId, srNo);
                 tf2edit.Status = ticketFollowUp.Status;
                 tf2edit.Remarks = ticketFollowUp.Remarks;
                 tf2edit.UpdatedDate = ticketFollowUp.UpdatedDate;
