@@ -9,7 +9,7 @@ namespace TipMvcApp.Controllers
     [Authorize]
     public class TicketTypeController : Controller
     {
-        static HttpClient client = new HttpClient { BaseAddress = new Uri(" http://localhost:5031/api/TicketType/") };
+        static HttpClient client = new HttpClient { BaseAddress = new Uri(" http://localhost:5026/ticketTypeSvc/") };
         // GET: TicketTypeController
         public async Task<ActionResult> Index()
         {
@@ -110,5 +110,7 @@ namespace TipMvcApp.Controllers
                 return View();
             }
         }
+
+
     }
 }

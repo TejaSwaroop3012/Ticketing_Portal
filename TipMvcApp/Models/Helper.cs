@@ -4,16 +4,16 @@ namespace TipMvcApp.Models
 {
     public class Helper
     {
-        static HttpClient clientEmployee = new HttpClient { BaseAddress = new Uri("http://localhost:5216/employeeSvc/") };
-        static HttpClient clientPriority = new HttpClient { BaseAddress = new Uri("http://localhost:5216/ticketPrioritySvc/") };
-        static HttpClient clientType = new HttpClient { BaseAddress = new Uri("http://localhost:5216/ticketTypeSvc/") };
-        static HttpClient clientTicket = new HttpClient { BaseAddress = new Uri("http://localhost:5216/ticketSvc/") };
+        static HttpClient clientEmployee = new HttpClient { BaseAddress = new Uri("http://localhost:5026/employeeSvc/") };
+        static HttpClient clientPriority = new HttpClient { BaseAddress = new Uri("http://localhost:5026/ticketPrioritySvc/") };
+        static HttpClient clientType = new HttpClient { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
+        static HttpClient clientTicket = new HttpClient { BaseAddress = new Uri("http://localhost:5026/ticketSvc/") };
         public static async Task<List<SelectListItem>> GetAllEmployees()
         {
             string userName = "Suresh";
             string role = "admin";
             string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5216/authSvc/") };
+            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
             string token = await client.GetStringAsync($"{userName}/{role}/{secretKey}");
             clientEmployee.DefaultRequestHeaders.Authorization = new
                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -31,7 +31,7 @@ namespace TipMvcApp.Models
             string userName = "Suresh";
             string role = "admin";
             string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5216/authSvc/") };
+            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
             string token = await client.GetStringAsync($"{userName}/{role}/{secretKey}");
             clientPriority.DefaultRequestHeaders.Authorization = new
                    System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -49,7 +49,7 @@ namespace TipMvcApp.Models
             string userName = "Suresh";
             string role = "admin";
             string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5216/authSvc/") };
+            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
             string token = await client.GetStringAsync($"{userName}/{role}/{secretKey}");
             clientType.DefaultRequestHeaders.Authorization = new
                   System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
@@ -67,7 +67,7 @@ namespace TipMvcApp.Models
             string userName = "Suresh";
             string role = "admin";
             string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5216/authSvc/") };
+            HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
             string token = await client.GetStringAsync($"{userName}/{role}/{secretKey}");
             clientTicket.DefaultRequestHeaders.Authorization = new
                   System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
