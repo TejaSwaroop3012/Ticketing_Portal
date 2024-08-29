@@ -61,7 +61,7 @@ namespace TicketLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                throw new TicketException(ex.Message);
             }
         }
 
@@ -108,7 +108,7 @@ namespace TicketLibrary.Repos
             }
             else
             {
-                throw new TicketException("No ....");
+                throw new TicketException("No such Ticket found..");
             }
         }
 
@@ -176,9 +176,9 @@ namespace TicketLibrary.Repos
                 Employee emp = await (from e in ctx.Employees where e.EmpId == empId select e).FirstAsync();
                 return emp;
             }
-            catch (TicketException ex)
+            catch
             {
-                throw new Exception(ex.Message);
+                throw new TicketException("No such Employee Id");
             }
         }
 
@@ -189,9 +189,9 @@ namespace TicketLibrary.Repos
                 TicketType type = await (from t in ctx.TicketTypes where t.TicketTypeId == tyepId select t).FirstAsync();
                 return type;
             }
-            catch (Exception ex)
+            catch
             {
-                throw new TicketException(ex.Message);
+                throw new TicketException("No such Ticket found..");
             }
         }
     }
