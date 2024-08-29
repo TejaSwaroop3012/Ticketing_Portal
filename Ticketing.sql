@@ -48,7 +48,7 @@ EmpId INT  NOT NULL,
 TicketTypeId INT  NOT NULL,
 Subject VARCHAR(50) NOT NULL,
 Description VARCHAR(100) NOT NULL,
-CreatedDate DATETIME DEFAULT GETDATE(),
+CreatedDate DATE DEFAULT GETDATE(),
 FOREIGN KEY (EmpId) REFERENCES Employee(EmpId),
 FOREIGN KEY (TicketTypeId) REFERENCES TicketType(TicketTypeId)
 );
@@ -56,14 +56,14 @@ FOREIGN KEY (TicketTypeId) REFERENCES TicketType(TicketTypeId)
 CREATE DATABASE TicketFollowupDB
 USE TicketFollowupDB
 CREATE TABLE Ticket (
-TicketId INT IDENTITY(1,1) PRIMARY KEY
+TicketId INT PRIMARY KEY
 )
 CREATE TABLE TicketFollowup (
 TicketId INT,
 SrNo INT,
 Status VARCHAR(50)  NOT NULL,
-UpdatedDate DATETIME DEFAULT GETDATE(),
-Remarks VARCHAR(100)  NOT NULL,
+UpdatedDate DATE DEFAULT GETDATE(),
+Remarks VARCHAR(100),
 PRIMARY KEY (TicketId, SrNo),
 FOREIGN KEY (TicketId) REFERENCES Ticket(TicketId)
 );
