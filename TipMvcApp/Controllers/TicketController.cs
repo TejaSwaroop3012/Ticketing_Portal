@@ -8,7 +8,7 @@ namespace TipMvcApp.Controllers
     [Authorize]
     public class TicketController : Controller
     {
-        static HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+        static HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketSvc/") };
         public async Task<ActionResult> Index()
         {
             string token = HttpContext.Session.GetString("token");
