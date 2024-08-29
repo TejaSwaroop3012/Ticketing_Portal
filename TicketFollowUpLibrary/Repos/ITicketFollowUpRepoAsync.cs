@@ -9,17 +9,17 @@ namespace TicketFollowUpLibrary.Repos
 {
     public interface ITicketFollowUpRepoAsync
     {
-        Task<List<TicketFollowup>> GetAllTicketFollowUps();
-        Task<List<TicketFollowup>> GetTicketFollowUpByTicketId(int ticketId);
-        Task<List<TicketFollowup>> GetTicketFollowUpByStatus(string status);
-        Task<List<TicketFollowup>> GetTicketFollowUpByDate(DateOnly updatedDate);
-        Task<TicketFollowup> GetTicketFollowUp(int ticketId, int srNo);
-        Task InsertTicketFollowUp(TicketFollowup ticketFollowUp);
-        Task UpdateTicketFollowUp(int ticketId, int srNo, TicketFollowup ticketFollowUp);
-        Task DeleteTicketFollowUp(int ticketId, int srNo);
-        Task AddTicket(Ticket ticket);
-        Task<Ticket> GetTicket(int ticketId);
-        Task DeleteTicket(int ticketId);
+        Task<List<TicketFollowup>> GetAllTicketFollowUpsAsync();
+        Task<List<TicketFollowup>> GetTicketFollowUpByTicketIdAsync(int ticketId);
+        Task<List<TicketFollowup>> GetTicketFollowUpByStatusAsync(string status);
+        Task<List<TicketFollowup>> GetTicketFollowUpByDateAsync(DateOnly updatedDate);
+        Task<TicketFollowup> GetTicketFollowUpAsync(int ticketId, int srNo);
+        Task InsertTicketFollowUpAsync(TicketFollowup ticketFollowUp);
+        Task UpdateTicketFollowUpAsync(int ticketId, int srNo, TicketFollowup ticketFollowUp);
+        Task DeleteTicketFollowUpAsync(int ticketId, int srNo);
+        Task AddTicketAsync(Ticket ticket);
+        Task<Ticket> GetTicketAsync(int ticketId);
+        Task DeleteTicketAsync(int ticketId);
 
     }
 }
