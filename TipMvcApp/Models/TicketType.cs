@@ -13,7 +13,7 @@ namespace TipMvcApp.Models
         [Display(Name = "Assigned To EmpId")]
         public int AssignedToEmpId { get; set; }
 
-        [Display(Name = "TPriority Id")]
+        [Display(Name = "Priority Id")]
         public int PriorityId { get; set; }
     }
 }
