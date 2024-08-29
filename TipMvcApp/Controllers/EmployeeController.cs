@@ -8,7 +8,7 @@ namespace TipMvcApp.Controllers
     [Authorize]
     public class EmployeeController : Controller
     {
-        static HttpClient client = new HttpClient { BaseAddress = new Uri("http://localhost:5292/api/Employee/") };
+        static HttpClient client = new HttpClient { BaseAddress = new Uri("http://localhost:5216/employeeSvc/") };
         // GET: EmployeeController
         public async Task<ActionResult> Index()
         {

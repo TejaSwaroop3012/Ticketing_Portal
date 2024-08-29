@@ -8,7 +8,7 @@ namespace TipMvcApp.Controllers
     [Authorize]
     public class TicketPriorityController : Controller
     {
-        static HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5133/api/TicketPriority/") };
+        static HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5216/ticketPrioritySvc/") };
         // GET: TicketPriorityController
         public async Task<ActionResult> Index()
         {
