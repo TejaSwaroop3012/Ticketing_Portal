@@ -156,7 +156,7 @@ namespace TicketTypeWebAPI.Controllers
                 client2.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                     var response = await client2.DeleteAsync($"TicketType/{TypeId}");
-                    if (response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode )
                     {
                         await ticket.DeleteTicketTypeAsync(TypeId);
                         return Ok();

@@ -1,0 +1,119 @@
+﻿
+    
+body{
+
+    background: url('/Images/Media.jfif') no-repeat center fixed;
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.hero-section {
+    background: none; 
+    color: white; 
+    padding: 60px 0;
+    text-align: center;
+    border-radius: 0 0 50px 50px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+    .hero-section h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: -50px;
+}
+
+.card {
+    flex: 1;
+    min-width: 250px;
+    max-width: 300px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-10px);
+    }
+
+.card-body {
+    padding: 30px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.btn-outline-primary {
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+.card-link {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit the color from parent elements */
+    display: block; /* Ensure the link covers the entire card */
+}
+
+.card {
+    display: block; /* Make the card a block element to fill the link area */
+    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition effects */
+}
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Slightly increase the shadow on hover */
+    }
+
+.card-body {
+    color: #333; /* Ensure text color is dark enough to be visible */
+}
+
+.card-title {
+    color: #333; /* Ensure the title text color is dark enough */
+}
+
+.card-text {
+    color: #555; /* Slightly lighter color for card text for better readability */
+}
+
+.card-link:hover .card-body {
+    color: inherit; /* Ensure color does not change on hover */
+}
+
+.card-link:hover .card-title,
+.card-link:hover .card-text {
+    color: inherit; /* Ensure text color remains consistent on hover */
+}
+
+has context menu
+
+
+
