@@ -23,25 +23,25 @@ namespace TicketWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            List<Ticket> tickets = await ticketRepoAsync.GetAllTickets();
+            List<Ticket> tickets = await ticketRepoAsync.GetAllTicketsAsync();
             return Ok(tickets);
         }
         [HttpGet("GetAllByEmpId/{empId}")]
         public async Task<ActionResult> GetAllByEmpId(int empId)
         {
-            List<Ticket> tickets = await ticketRepoAsync.GetTicketByEmpId(empId);
+            List<Ticket> tickets = await ticketRepoAsync.GetTicketByEmpIdAsync(empId);
             return Ok(tickets);
         }
         [HttpGet("GetAllByTypeId/{typeId}")]
         public async Task<ActionResult> GetAllByTypeId(int typeId)
         {
-            List<Ticket> tickets = await ticketRepoAsync.GetTicketByTicketTypeId(typeId);
+            List<Ticket> tickets = await ticketRepoAsync.GetTicketByTicketTypeIdAsync(typeId);
             return Ok(tickets);
         }
         [HttpGet("GetAllByEmpIdandTypeId/{empId}/{tyepId}")]
         public async Task<ActionResult> GetAllByEmpIdandTypeId(int empId, int tyepId)
         {
-            List<Ticket> tickets = await ticketRepoAsync.GetTicketByTicketTypeIdandEmployeeId(empId, tyepId);
+            List<Ticket> tickets = await ticketRepoAsync.GetTicketByTicketTypeIdandEmployeeIdAsync(empId, tyepId);
             return Ok(tickets);
         }
         [HttpGet("GetTicketByTicketId/{ticketId}")]
@@ -49,7 +49,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                Ticket ticket = await ticketRepoAsync.GetTicketById(ticketId);
+                Ticket ticket = await ticketRepoAsync.GetTicketByIdAsync(ticketId);
                 return Ok(ticket);
             }
             catch (TicketException ex)
@@ -62,7 +62,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                Employee emp = await ticketRepoAsync.GetEmployeeById(empId);
+                Employee emp = await ticketRepoAsync.GetEmployeeByIdAsync(empId);
                 return Ok(emp);
             }
             catch (TicketException ex)
@@ -75,7 +75,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                TicketType type = await ticketRepoAsync.GetTicketTypeById(typeId);
+                TicketType type = await ticketRepoAsync.GetTicketTypeByIdAsync(typeId);
                 return Ok(type);
             }
             catch (TicketException ex)
@@ -89,7 +89,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                await ticketRepoAsync.AddTicket(ticket);
+                await ticketRepoAsync.AddTicketAsync(ticket);
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
@@ -111,7 +111,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                await ticketRepoAsync.AddEmployee(employee);
+                await ticketRepoAsync.AddEmployeeAsync(employee);
                 return Created($"api/Ticket/{employee.EmpId}", employee);
             }
             catch (TicketException ex)
@@ -124,7 +124,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                await ticketRepoAsync.AddTicketType(type);
+                await ticketRepoAsync.AddTicketTypeAsync(type);
                 return Created($"api/Ticket/{type.TicketTypeId}", type);
             }
             catch (TicketException ex)
@@ -137,7 +137,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                await ticketRepoAsync.UpdateTicket(ticketId, ticket);
+                await ticketRepoAsync.UpdateTicketAsync(ticketId, ticket);
                 return Ok(ticket);
             }
             catch (TicketException ex)
@@ -160,7 +160,7 @@ namespace TicketWebAPI.Controllers
                 var response1 = await client2.DeleteAsync("DelTicket/" + ticketId);
                 if (response1.IsSuccessStatusCode)
                 {
-                    await ticketRepoAsync.DeleteTicket(ticketId);
+                    await ticketRepoAsync.DeleteTicketAsync(ticketId);
                     return Ok();
                 }
                 else
@@ -173,7 +173,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                await ticketRepoAsync.DeleteEmployee(empId);
+                await ticketRepoAsync.DeleteEmployeeAsync(empId);
                 return Ok();
             }
             catch (TicketException ex)
@@ -186,7 +186,7 @@ namespace TicketWebAPI.Controllers
         {
             try
             {
-                await ticketRepoAsync.DeleteTicketType(typeId);
+                await ticketRepoAsync.DeleteTicketTypeAsync(typeId);
                 return Ok();
             }
             catch (TicketException ex)
