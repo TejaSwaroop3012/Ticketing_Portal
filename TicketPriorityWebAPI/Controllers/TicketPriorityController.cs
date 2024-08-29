@@ -45,9 +45,9 @@ namespace TicketPriorityWebAPI.Controllers
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
                 client.DefaultRequestHeaders.Authorization = new
                             System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 await client.PostAsJsonAsync("TicketPriority", new { PriorityId = ticketPriority.PriorityId });
@@ -79,9 +79,9 @@ namespace TicketPriorityWebAPI.Controllers
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
                 client5.DefaultRequestHeaders.Authorization = new
                              System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response1 = await client5.DeleteAsync($"FromPriority/{priorityId}");

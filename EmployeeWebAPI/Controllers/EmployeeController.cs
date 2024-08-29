@@ -46,13 +46,13 @@ namespace EmployeeWebAPI.Controllers
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
                 client2.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 await client2.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
-                HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketSvc/") };
                 client3.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 await client3.PostAsJsonAsync("Employee", new { EmpId = employee.EmpId });
@@ -84,13 +84,13 @@ namespace EmployeeWebAPI.Controllers
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
                 client2.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response1=await client2.DeleteAsync("FromEmployee/" + empId );
-                HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketSvc/") };
                 client3.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response2=await client3.DeleteAsync("Employee/" + empId );
@@ -103,14 +103,14 @@ namespace EmployeeWebAPI.Controllers
                 {
                     if (response1.IsSuccessStatusCode)
                     {
-                        HttpClient client4 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                        HttpClient client4 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
                         client4.DefaultRequestHeaders.Authorization = new 
                                         System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                         await client4.PostAsJsonAsync("Employee/", new {EmpId = empId});
                     }
                     if (response2.IsSuccessStatusCode)
                     {
-                        HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
+                        HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketSvc/") };
                         client5.DefaultRequestHeaders.Authorization = new
                                         System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                         await client5.PostAsJsonAsync("Employee/", new { EmpId = empId });
