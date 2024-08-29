@@ -1,6 +1,63 @@
 @TicketWebAPI_HostAddress = http://localhost:5185
 
-GET {{TicketWebAPI_HostAddress}}/weatherforecast/
+GET {{TicketWebAPI_HostAddress}}/api/Ticket/
 Accept: application/json
+###
 
+
+GET {{TicketWebAPI_HostAddress}}/api/Ticket/GetAllByEmpId/101
+Accept: application/json
+###
+
+
+GET {{TicketWebAPI_HostAddress}}/api/Ticket/GetAllByTypeId/1
+Accept: application/json
+###
+
+GET {{TicketWebAPI_HostAddress}}/api/Ticket/GetAllByEmpIdandTypeId/101/1
+Accept: application/json
+###
+
+GET {{TicketWebAPI_HostAddress}}/api/Ticket/GetTicketByTicketId/1
+Accept: application/json
+###
+
+
+GET {{TicketWebAPI_HostAddress}}/api/Ticket/GetEmployeeByEmpId/101
+Accept: application/json
+###
+
+GET {{TicketWebAPI_HostAddress}}/api/Ticket/GetTicketTypeByTicketTypeId/1
+Accept: application/json
+###
+
+POST {{TicketWebAPI_HostAddress}}/api/Ticket
+Content-Type:application-json
+{
+  "TicketId": 1,
+  "EmpId": 101,
+  "TicketTypeId": 1,
+  "Subject": "Software Installation",
+  "Description": "Installation of VS Code"
+}
+###
+
+PUT {{TicketWebAPI_HostAddress}}/api/Ticket/1
+Content-Type:application-json
+{
+  "TicketId": 1,
+  "EmpId": 101,
+  "TicketTypeId": 1,
+  "Subject": "Softwarw Installation",
+  "Description": "Installation of VS Code updated version"
+}
+###
+
+DELETE {{TicketWebAPI_HostAddress}}/api/Ticket/1
+###
+
+DELETE {{TicketWebAPI_HostAddress}}/api/Ticket/Employee/101
+###
+
+DELETE {{TicketWebAPI_HostAddress}}/api/Ticket/TicketType/1
 ###

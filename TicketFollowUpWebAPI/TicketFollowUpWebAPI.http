@@ -34,7 +34,7 @@ Content-Type: application/json
 POST {{TicketFollowUpWebAPI_HostAddress}}/api/TicketFollowUp
 Content-Type: application/json
 {
-"ticketId": 2,
+  "ticketId": 2,
   "srNo": 1,
   "Status": "Pending",
   "updatedDate": "2024-08-26",
