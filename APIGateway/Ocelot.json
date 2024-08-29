@@ -69,7 +69,7 @@
 
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5216"
+    "BaseUrl": "http://localhost:5026"
   }
 }
 
