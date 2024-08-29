@@ -11,7 +11,7 @@ namespace TicketTypeLibrary.Repos
     public class EFTicketTypeRepoAsync : ITicketTypeRepoAsync
     {
         TicketTypeDBContext ctx = new TicketTypeDBContext();
-        public async Task AddEmployee(Employee Emp)
+        public async Task AddEmployeeAsync(Employee Emp)
         {
             try
             {
@@ -24,7 +24,7 @@ namespace TicketTypeLibrary.Repos
             }
         }
 
-        public async Task AddPriority(TicketPriority priority)
+        public async Task AddPriorityAsync(TicketPriority priority)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace TicketTypeLibrary.Repos
                 throw new TicketTypeException(ex.Message);
             }
         }
-        public async Task<Employee> GetEmployeebyId(int empId)
+        public async Task<Employee> GetEmployeebyIdAsync(int empId)
         {
             try
             {
@@ -50,11 +50,11 @@ namespace TicketTypeLibrary.Repos
             
         }
 
-        public async Task DeleteEmployee(int EmpId)
+        public async Task DeleteEmployeeAsync(int EmpId)
         {
             try
             {
-                Employee employee = await GetEmployeebyId(EmpId);
+                Employee employee = await GetEmployeebyIdAsync(EmpId);
                 ctx.Employees.Remove(employee);
                 await ctx.SaveChangesAsync();
             }
@@ -64,7 +64,7 @@ namespace TicketTypeLibrary.Repos
             }
         }
 
-        public async Task<TicketPriority> GetTicketPrioritybyId(int priorityId)
+        public async Task<TicketPriority> GetTicketPrioritybyIdAsync(int priorityId)
         {
             try
             {
@@ -77,11 +77,11 @@ namespace TicketTypeLibrary.Repos
             }
         }
 
-        public async Task DeletePriority(int priorityId)
+        public async Task DeletePriorityAsync(int priorityId)
         {
             try
             {
-                TicketPriority ticketPriority = await GetTicketPrioritybyId(priorityId);
+                TicketPriority ticketPriority = await GetTicketPrioritybyIdAsync(priorityId);
                 ctx.TicketPriorities.Remove(ticketPriority);
                 await ctx.SaveChangesAsync();
             }
@@ -91,11 +91,11 @@ namespace TicketTypeLibrary.Repos
             }
         }
 
-        public async Task DeleteTicketType(int TypeId)
+        public async Task DeleteTicketTypeAsync(int TypeId)
         {
             try
             {
-                TicketType ticketType = await GetTicketbyId(TypeId);
+                TicketType ticketType = await GetTicketbyIdAsync(TypeId);
                 ctx.TicketTypes.Remove(ticketType);
                 await ctx.SaveChangesAsync();
             }
@@ -105,7 +105,7 @@ namespace TicketTypeLibrary.Repos
             }
         }
 
-        public async Task<List<TicketType>> GetAllbyAssignedEmpId(int EmpId)
+        public async Task<List<TicketType>> GetAllbyAssignedEmpIdAsync(int EmpId)
         {
             List<TicketType> ticketTypes = await (from t in ctx.TicketTypes where t.AssignedToEmpId == EmpId select t).ToListAsync();
             if (ticketTypes.Count > 0)
@@ -118,12 +118,12 @@ namespace TicketTypeLibrary.Repos
             }
         }
 
-        public async Task<List<TicketType>> GetAllTicketType()
+        public async Task<List<TicketType>> GetAllTicketTypeAsync()
         {
             List<TicketType> ticketTypes = await ctx.TicketTypes.ToListAsync();
             return ticketTypes;
         }
-        public async Task<TicketType> GetTicketbyId(int TypeId)
+        public async Task<TicketType> GetTicketbyIdAsync(int TypeId)
         {
             try
             {
@@ -135,7 +135,7 @@ namespace TicketTypeLibrary.Repos
                 throw new TicketTypeException("No such ticketId");
             }
         }
-        public async Task InsertTicketType(TicketType type)
+        public async Task InsertTicketTypeAsync(TicketType type)
         {
             try
             {
@@ -148,11 +148,11 @@ namespace TicketTypeLibrary.Repos
             }
         }
 
-        public async Task UpdateTicketType(int TypeId, TicketType type)
+        public async Task UpdateTicketTypeAsync(int TypeId, TicketType type)
         {
             try
             {
-                TicketType ticketType = await GetTicketbyId(TypeId);
+                TicketType ticketType = await GetTicketbyIdAsync(TypeId);
                 ticketType.TicketTypeName = type.TicketTypeName;
                 ticketType.AssignedToEmpId = type.AssignedToEmpId;
                 ticketType.PriorityId = type.PriorityId;

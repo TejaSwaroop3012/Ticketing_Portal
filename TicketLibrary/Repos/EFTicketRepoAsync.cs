@@ -13,7 +13,7 @@ namespace TicketLibrary.Repos
     {
         TicketDBContext ctx = new TicketDBContext();
 
-        public async Task AddEmployee(Employee employee)
+        public async Task AddEmployeeAsync(Employee employee)
         {
             try
             {
@@ -26,7 +26,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task AddTicketType(TicketType type)
+        public async Task AddTicketTypeAsync(TicketType type)
         {
             try
             {
@@ -38,7 +38,7 @@ namespace TicketLibrary.Repos
                 throw new TicketException(ex.Message);
             }
         }
-        public async Task AddTicket(Ticket ticket)
+        public async Task AddTicketAsync(Ticket ticket)
         {
             try
             {
@@ -51,7 +51,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task DeleteEmployee(int empId)
+        public async Task DeleteEmployeeAsync(int empId)
         {
             Employee emp = await GetEmployeeById(empId);
             try
@@ -65,7 +65,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task DeleteTicket(int ticketId)
+        public async Task DeleteTicketAsync(int ticketId)
         {
             Ticket ticket = await GetTicketById(ticketId);
             try
@@ -79,7 +79,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task DeleteTicketType(int typeId)
+        public async Task DeleteTicketTypeAsync(int typeId)
         {
             TicketType type = await GetTicketTypeById(typeId);
             try
@@ -92,14 +92,12 @@ namespace TicketLibrary.Repos
                 throw new TicketException(ex.Message);
             }
         }
-
-
-        public async Task<List<Ticket>> GetAllTickets()
+        public async Task<List<Ticket>> GetAllTicketsAsync()
         {
             List<Ticket> tickets = await ctx.Tickets.ToListAsync();
             return tickets;
         }
-        public async Task<List<Ticket>> GetTicketByEmpId(int empId)
+        public async Task<List<Ticket>> GetTicketByEmpIdAsync(int empId)
         {
             List<Ticket> tickets = await (from t in ctx.Tickets where t.EmpId == empId select t).ToListAsync();
             if (tickets.Count > 0)
@@ -112,7 +110,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task<Ticket> GetTicketById(int ticketId)
+        public async Task<Ticket> GetTicketByIdAsync(int ticketId)
         {
             try
             {
@@ -126,7 +124,7 @@ namespace TicketLibrary.Repos
 
         }
 
-        public async Task<List<Ticket>> GetTicketByTicketTypeId(int typeId)
+        public async Task<List<Ticket>> GetTicketByTicketTypeIdAsync(int typeId)
         {
             List<Ticket> tickets = await (from t in ctx.Tickets where t.TicketTypeId == typeId select t).ToListAsync();
             if (tickets.Count > 0)
@@ -139,7 +137,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task<List<Ticket>> GetTicketByTicketTypeIdandEmployeeId(int empId, int typeId)
+        public async Task<List<Ticket>> GetTicketByTicketTypeIdandEmployeeIdAsync(int empId, int typeId)
         {
             List<Ticket> tickets = await (from t in ctx.Tickets where t.TicketTypeId == typeId && t.EmpId == empId select t).ToListAsync();
             if (tickets.Count > 0)
@@ -153,9 +151,9 @@ namespace TicketLibrary.Repos
         }
 
 
-        public async Task UpdateTicket(int ticketId, Ticket ticket)
+        public async Task UpdateTicketAsync(int ticketId, Ticket ticket)
         {
-            Ticket t = await GetTicketById(ticketId);
+            Ticket t = await GetTicketByIdAsync(ticketId);
             try
             {
                 t.EmpId = ticket.EmpId;
@@ -171,7 +169,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task<Employee> GetEmployeeById(int empId)
+        public async Task<Employee> GetEmployeeByIdAsync(int empId)
         {
             try
             {
@@ -184,7 +182,7 @@ namespace TicketLibrary.Repos
             }
         }
 
-        public async Task<TicketType> GetTicketTypeById(int tyepId)
+        public async Task<TicketType> GetTicketTypeByIdAsync(int tyepId)
         {
             try
             {

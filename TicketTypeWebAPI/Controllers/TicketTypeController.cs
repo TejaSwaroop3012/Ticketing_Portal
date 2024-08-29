@@ -11,7 +11,7 @@ namespace TicketTypeWebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class TicketTypeController : ControllerBase
     {
         ITicketTypeRepoAsync ticket;
@@ -22,7 +22,7 @@ namespace TicketTypeWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {          
-                List<TicketType> ticketTypes = await ticket.GetAllTicketType();
+                List<TicketType> ticketTypes = await ticket.GetAllTicketTypeAsync();
                 return Ok(ticketTypes);           
         }
 
@@ -31,7 +31,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                List<TicketType> ticketTypes = await ticket.GetAllbyAssignedEmpId(EmpId);
+                List<TicketType> ticketTypes = await ticket.GetAllbyAssignedEmpIdAsync(EmpId);
                 return Ok(ticketTypes);
             }
             catch(Exception ex)
@@ -45,7 +45,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                TicketType ticketTypes = await ticket.GetTicketbyId(typdId);
+                TicketType ticketTypes = await ticket.GetTicketbyIdAsync(typdId);
                 return Ok(ticketTypes);
             }
             catch (TicketTypeException ex)
@@ -59,7 +59,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                Employee employee = await ticket.GetEmployeebyId(empId);
+                Employee employee = await ticket.GetEmployeebyIdAsync(empId);
                 return Ok(employee);
             }
             catch (TicketTypeException ex)
@@ -72,7 +72,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                TicketPriority ticketPriority = await ticket.GetTicketPrioritybyId(priorityId);
+                TicketPriority ticketPriority = await ticket.GetTicketPrioritybyIdAsync(priorityId);
                 return Ok(ticketPriority);
             }
             catch (TicketTypeException ex)
@@ -85,7 +85,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                await ticket.InsertTicketType(ticketType);
+                await ticket.InsertTicketTypeAsync(ticketType);
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
@@ -107,7 +107,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                await ticket.AddEmployee(employee);
+                await ticket.AddEmployeeAsync(employee);
                 return Created($"api/TicketType/{employee.EmpId}", employee);
             }
             catch (TicketTypeException ex) 
@@ -120,7 +120,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                await ticket.AddPriority(ticketPriority);
+                await ticket.AddPriorityAsync(ticketPriority);
                 return Created($"api/TicketType/{ticketPriority.PriorityId}", ticketPriority);
             }
             catch (TicketTypeException ex)
@@ -133,7 +133,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                await ticket.UpdateTicketType(TypeId, type);
+                await ticket.UpdateTicketTypeAsync(TypeId, type);
                 return Ok(type);
             }
             catch (TicketTypeException ex)
@@ -158,7 +158,7 @@ namespace TicketTypeWebAPI.Controllers
                     var response = await client2.DeleteAsync($"TicketType/{TypeId}");
                     if (response.IsSuccessStatusCode )
                     {
-                        await ticket.DeleteTicketType(TypeId);
+                        await ticket.DeleteTicketTypeAsync(TypeId);
                         return Ok();
                     }
                     else
@@ -176,7 +176,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                await ticket.DeleteEmployee(EmpId);
+                await ticket.DeleteEmployeeAsync(EmpId);
                 return Ok();
             }
             catch (TicketTypeException ex)
@@ -189,7 +189,7 @@ namespace TicketTypeWebAPI.Controllers
         {
             try
             {
-                await ticket.DeletePriority(priorityId);
+                await ticket.DeletePriorityAsync(priorityId);
                 return Ok();
             }
             catch (TicketTypeException ex)

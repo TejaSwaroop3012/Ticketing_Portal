@@ -21,7 +21,7 @@ namespace TipMvcApp.Models
             List<Employee> employees = await clientEmployee.GetFromJsonAsync<List<Employee>>("");
             foreach(Employee e in employees)
             {
-                emplist.Add(new SelectListItem { Text = $"{e.EmpId}", Value = $"{e.EmpId}" });
+                emplist.Add(new SelectListItem { Text = $"{e.EmpId}. {e.FirstName} {e.LastName}", Value = $"{e.EmpId}" });
             }
             return emplist;
         }
@@ -39,7 +39,7 @@ namespace TipMvcApp.Models
             List<TicketPriority> ticketPriorities = await clientPriority.GetFromJsonAsync<List<TicketPriority>>("");
             foreach (TicketPriority p in ticketPriorities)
             {
-                prilist.Add(new SelectListItem { Text = $"{p.PriorityId}", Value = $"{p.PriorityId}" });
+                prilist.Add(new SelectListItem { Text = $"{p.PriorityId}. {p.PriorityName}", Value = $"{p.PriorityId}" });
             }
             return prilist;
         }
@@ -57,7 +57,7 @@ namespace TipMvcApp.Models
             List<TicketType> ticketTypes = await clientType.GetFromJsonAsync<List<TicketType>>("");
             foreach (TicketType tt in ticketTypes)
             {
-                typelist.Add(new SelectListItem { Text = $"{tt.TicketTypeId}", Value = $"{tt.TicketTypeId}" });
+                typelist.Add(new SelectListItem { Text = $"{tt.TicketTypeId}. {tt.TicketTypeName}", Value = $"{tt.TicketTypeId}" });
             }
             return typelist;
         }
@@ -75,7 +75,7 @@ namespace TipMvcApp.Models
             List<Ticket> tickets = await clientTicket.GetFromJsonAsync<List<Ticket>>("");
             foreach (Ticket t in tickets)
             {
-                ticketlist.Add(new SelectListItem { Text = $"{t.TicketId}", Value = $"{t.TicketId}" });
+                ticketlist.Add(new SelectListItem { Text = $"{t.TicketId}. {t.Subject}", Value = $"{t.TicketId}" });
             }
             return ticketlist;
         }

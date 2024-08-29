@@ -9,10 +9,10 @@ namespace TicketPriorityLibrary.Repos
 {
     public interface ITicketPriorityRepoAsync
     {
-        Task<List<TicketPriority>> GetAllTicketPriorities();
-        Task<TicketPriority> GetTicketPriorityByPriorityId(int priorityId);
-        Task InsertTicketPriority(TicketPriority ticketPriority);
-        Task UpdateTicketPriority(int priorityId, TicketPriority ticketPriority);
-        Task DeleteTicketPriority(int priorityId);
+        Task<List<TicketPriority>> GetAllTicketPrioritiesAsync();
+        Task<TicketPriority> GetTicketPriorityByPriorityIdAsync(int priorityId);
+        Task InsertTicketPriorityAsync(TicketPriority ticketPriority);
+        Task UpdateTicketPriorityAsync(int priorityId, TicketPriority ticketPriority);
+        Task DeleteTicketPriorityAsync(int priorityId);
     }
 }

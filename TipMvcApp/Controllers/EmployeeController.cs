@@ -104,7 +104,7 @@ namespace TipMvcApp.Controllers
                 await client.DeleteAsync($"{empId}");
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch 
             {
                 return View();
             }

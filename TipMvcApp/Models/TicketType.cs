@@ -4,10 +4,10 @@ namespace TipMvcApp.Models
 {
     public class TicketType
     {
-        [Display(Name = "TicketType Id")]
+        [Display(Name = "Ticket Type Id")]
         public int TicketTypeId { get; set; }
 
-        [Display(Name = "TicketType Name")]
+        [Display(Name = "Ticket Type Name")]
         public string? TicketTypeName { get; set; }
 
         [Display(Name = "Assigned To EmpId")]

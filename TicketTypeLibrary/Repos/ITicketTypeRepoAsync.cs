@@ -9,17 +9,17 @@ namespace TicketTypeLibrary.Repos
 {
     public interface ITicketTypeRepoAsync
     {
-        Task<List<TicketType>> GetAllTicketType();
-        Task<List<TicketType>> GetAllbyAssignedEmpId(int EmpId);
-        Task<TicketType> GetTicketbyId(int TypeId);
-        Task<Employee> GetEmployeebyId(int empId);
-        Task<TicketPriority> GetTicketPrioritybyId(int priorityId);
-        Task InsertTicketType(TicketType type);
-        Task UpdateTicketType(int TypeId, TicketType type);
-        Task DeleteTicketType(int TypeId);
-        Task AddEmployee(Employee Emp);
-        Task DeleteEmployee(int EmpId);
-        Task AddPriority(TicketPriority priority);
-        Task DeletePriority(int priorityId);    
+        Task<List<TicketType>> GetAllTicketTypeAsync();
+        Task<List<TicketType>> GetAllbyAssignedEmpIdAsync(int EmpId);
+        Task<TicketType> GetTicketbyIdAsync(int TypeId);
+        Task<Employee> GetEmployeebyIdAsync(int empId);
+        Task<TicketPriority> GetTicketPrioritybyIdAsync(int priorityId);
+        Task InsertTicketTypeAsync(TicketType type);
+        Task UpdateTicketTypeAsync(int TypeId, TicketType type);
+        Task DeleteTicketTypeAsync(int TypeId);
+        Task AddEmployeeAsync(Employee Emp);
+        Task DeleteEmployeeAsync(int EmpId);
+        Task AddPriorityAsync(TicketPriority priority);
+        Task DeletePriorityAsync(int priorityId);    
     }
 }

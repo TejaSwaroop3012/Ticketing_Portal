@@ -28,6 +28,7 @@ namespace TipMvcApp
 
             builder.Services.AddSession();
             builder.Services.AddOutputCache();
+            builder.Logging.AddConsole();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

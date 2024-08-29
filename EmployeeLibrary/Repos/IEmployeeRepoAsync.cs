@@ -9,11 +9,11 @@ namespace EmployeeLibrary.Repos
 {
     public interface IEmployeeRepoAsync
     {
-        Task<List<Employee>> GetAllEmployees();
-        Task<Employee> GetByEmpId(int empId);
-        Task InsertEmployee(Employee employee);
-        Task UpdateEmployee(int empId, Employee employee);
-        Task DeleteEmployee(int empId);
+        Task<List<Employee>> GetAllEmployeesAsync();
+        Task<Employee> GetByEmpIdAsync(int empId);
+        Task InsertEmployeeAsync(Employee employee);
+        Task UpdateEmployeeAsync(int empId, Employee employee);
+        Task DeleteEmployeeAsync(int empId);
 
     }
 }

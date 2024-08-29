@@ -11,9 +11,9 @@ namespace TicketPriorityLibrary.Repos
     public class EFTicketPriorityRepoAsync : ITicketPriorityRepoAsync
     {
         TicketPriorityDBContext ctx = new TicketPriorityDBContext();
-        public async Task DeleteTicketPriority(int priorityId)
+        public async Task DeleteTicketPriorityAsync(int priorityId)
         {
-            TicketPriority ticketPriority = await GetTicketPriorityByPriorityId(priorityId);
+            TicketPriority ticketPriority = await GetTicketPriorityByPriorityIdAsync(priorityId);
             try
             {
                 ctx.TicketPriorities.Remove(ticketPriority);
@@ -25,13 +25,13 @@ namespace TicketPriorityLibrary.Repos
             }
         }
 
-        public async Task<List<TicketPriority>> GetAllTicketPriorities()
+        public async Task<List<TicketPriority>> GetAllTicketPrioritiesAsync()
         {
             List<TicketPriority> ticketPriorities = await ctx.TicketPriorities.ToListAsync();
             return ticketPriorities;
         }
 
-        public async Task<TicketPriority> GetTicketPriorityByPriorityId(int priorityId)
+        public async Task<TicketPriority> GetTicketPriorityByPriorityIdAsync(int priorityId)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace TicketPriorityLibrary.Repos
             }
         }
 
-        public async Task InsertTicketPriority(TicketPriority ticketPriority)
+        public async Task InsertTicketPriorityAsync(TicketPriority ticketPriority)
         {
             try
             {
@@ -57,11 +57,11 @@ namespace TicketPriorityLibrary.Repos
             }
         }
 
-        public async Task UpdateTicketPriority(int priorityId, TicketPriority ticketPriority)
+        public async Task UpdateTicketPriorityAsync(int priorityId, TicketPriority ticketPriority)
         {
             try
             {
-                TicketPriority ticketPriority2edit = await GetTicketPriorityByPriorityId(priorityId);
+                TicketPriority ticketPriority2edit = await GetTicketPriorityByPriorityIdAsync(priorityId);
                 ticketPriority2edit.PriorityName = ticketPriority.PriorityName;
                 ticketPriority2edit.RespondWithin = ticketPriority.RespondWithin;
                 ticketPriority2edit.ResolveWithin = ticketPriority.ResolveWithin;
