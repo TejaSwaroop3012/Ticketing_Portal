@@ -91,7 +91,7 @@ namespace EmployeeWebAPI.Controllers
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response1=await client2.DeleteAsync("FromEmployee/" + empId );
                 HttpClient client3 = new HttpClient() { BaseAddress = new Uri("http://localhost:5185/api/Ticket/") };
-                client2.DefaultRequestHeaders.Authorization = new
+                client3.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response2=await client3.DeleteAsync("Employee/" + empId );
                 if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
