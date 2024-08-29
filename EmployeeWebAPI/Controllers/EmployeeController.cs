@@ -21,7 +21,7 @@ namespace EmployeeWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            List<Employee> employees = await employeeRepository.GetAllEmployees();
+            List<Employee> employees = await employeeRepository.GetAllEmployeesAsync();
             return Ok(employees);
         }
         [HttpGet("{empId}")]
@@ -29,7 +29,7 @@ namespace EmployeeWebAPI.Controllers
         {
             try
             {
-                Employee employee = await employeeRepository.GetByEmpId(empId);
+                Employee employee = await employeeRepository.GetByEmpIdAsync(empId);
                 return Ok(employee);
             }
             catch (EmployeeException ex)
@@ -42,7 +42,7 @@ namespace EmployeeWebAPI.Controllers
         {
             try
             {
-                await employeeRepository.InsertEmployee(employee);
+                await employeeRepository.InsertEmployeeAsync(employee);
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
@@ -68,7 +68,7 @@ namespace EmployeeWebAPI.Controllers
         {
             try
             {
-                await employeeRepository.UpdateEmployee(empId,employee);
+                await employeeRepository.UpdateEmployeeAsync(empId,employee);
                 return Ok(employee);
             }
             catch(EmployeeException ex)
@@ -96,7 +96,7 @@ namespace EmployeeWebAPI.Controllers
                 var response2=await client3.DeleteAsync("Employee/" + empId );
                 if (response1.IsSuccessStatusCode && response2.IsSuccessStatusCode)
                 {
-                    await employeeRepository.DeleteEmployee(empId);
+                    await employeeRepository.DeleteEmployeeAsync(empId);
                     return Ok();
                 }
                 else
