@@ -61,7 +61,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5271
+          "Port": 5153
         }
       ],
       "UpstreamPathTemplate": "/authSvc/{something}"
