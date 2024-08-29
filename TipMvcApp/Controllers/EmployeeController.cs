@@ -101,13 +101,12 @@ namespace TipMvcApp.Controllers
         {
             try
             {
-                var response = await client.DeleteAsync($"{empId}");
-                response.EnsureSuccessStatusCode();
+                await client.DeleteAsync($"{empId}");
                 return RedirectToAction(nameof(Index));
             }
-            catch (HttpRequestException ex) 
+            catch 
             {
-                throw;
+                return View();
             }
         }
     }
