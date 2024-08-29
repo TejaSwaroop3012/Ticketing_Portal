@@ -27,7 +27,8 @@ namespace TipMvcApp
             });
 
             builder.Services.AddSession();
-
+            builder.Services.AddOutputCache();
+            builder.Logging.AddConsole();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -39,10 +40,11 @@ namespace TipMvcApp
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
-
+            app.UseOutputCache();
             app.UseAuthorization();
 
             app.MapControllerRoute(

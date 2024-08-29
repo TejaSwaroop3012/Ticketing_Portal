@@ -21,7 +21,7 @@ namespace TicketFollowUpWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            List<TicketFollowup> ticketFollowUps = await repo.GetAllTicketFollowUps();
+            List<TicketFollowup> ticketFollowUps = await repo.GetAllTicketFollowUpsAsync();
             return Ok(ticketFollowUps);
         }
 
@@ -30,7 +30,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                TicketFollowup ticketFollowup = await repo.GetTicketFollowUp(ticketId, srNo);
+                TicketFollowup ticketFollowup = await repo.GetTicketFollowUpAsync(ticketId, srNo);
                 return Ok(ticketFollowup);
             }
             catch (TicketFollowUpException ex)
@@ -44,7 +44,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                List<TicketFollowup> ticketFollowups = await repo.GetTicketFollowUpByDate(updatedDate);
+                List<TicketFollowup> ticketFollowups = await repo.GetTicketFollowUpByDateAsync(updatedDate);
                 return Ok(ticketFollowups);
             }
             catch (TicketFollowUpException ex)
@@ -58,7 +58,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                List<TicketFollowup> ticketFollowups = await repo.GetTicketFollowUpByStatus(status);
+                List<TicketFollowup> ticketFollowups = await repo.GetTicketFollowUpByStatusAsync(status);
                 return Ok(ticketFollowups);
             }
             catch (TicketFollowUpException ex)
@@ -72,7 +72,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                List<TicketFollowup> ticketFollowups = await repo.GetTicketFollowUpByTicketId(ticketId);
+                List<TicketFollowup> ticketFollowups = await repo.GetTicketFollowUpByTicketIdAsync(ticketId);
                 return Ok(ticketFollowups);
             }
             catch (TicketFollowUpException ex)
@@ -86,7 +86,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                await repo.InsertTicketFollowUp(ticketFollowUp);
+                await repo.InsertTicketFollowUpAsync(ticketFollowUp);
                 return Created($"api/TicketFollowUp/{ticketFollowUp.TicketId}/{ticketFollowUp.SrNo}", ticketFollowUp);
             }
             catch (TicketFollowUpException ex)
@@ -100,7 +100,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                await repo.UpdateTicketFollowUp(ticketId, srNo, ticketFollowUp);
+                await repo.UpdateTicketFollowUpAsync(ticketId, srNo, ticketFollowUp);
                 return Ok(ticketFollowUp);
             }
             catch (TicketFollowUpException ex)
@@ -114,7 +114,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                await repo.DeleteTicketFollowUp(ticketId, srNo);
+                await repo.DeleteTicketFollowUpAsync(ticketId, srNo);
                 return Ok();
             }
             catch (TicketFollowUpException ex)
@@ -128,7 +128,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                await repo.AddTicket(ticket);
+                await repo.AddTicketAsync(ticket);
                 return Created($"api/TicketFollowUp/{ticket.TicketId}", ticket);
             }
             catch (TicketFollowUpException ex)
@@ -142,7 +142,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                Ticket ticket = await repo.GetTicket(ticketId);
+                Ticket ticket = await repo.GetTicketAsync(ticketId);
                 return Ok(ticket);
             }
             catch (TicketFollowUpException ex)
@@ -156,7 +156,7 @@ namespace TicketFollowUpWebAPI.Controllers
         {
             try
             {
-                await repo.DeleteTicket(ticketId);
+                await repo.DeleteTicketAsync(ticketId);
                 return Ok();
             }
             catch (TicketFollowUpException ex)

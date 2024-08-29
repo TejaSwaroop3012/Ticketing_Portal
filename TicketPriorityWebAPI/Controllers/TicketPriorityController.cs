@@ -20,7 +20,7 @@ namespace TicketPriorityWebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            List<TicketPriority> ticketPriorities = await ticketPriorityRepo.GetAllTicketPriorities();
+            List<TicketPriority> ticketPriorities = await ticketPriorityRepo.GetAllTicketPrioritiesAsync();
             return Ok(ticketPriorities);
         }
         [HttpGet("{priorityId}")]
@@ -28,7 +28,7 @@ namespace TicketPriorityWebAPI.Controllers
         {
             try
             {
-                TicketPriority ticketPriority = await ticketPriorityRepo.GetTicketPriorityByPriorityId(priorityId);
+                TicketPriority ticketPriority = await ticketPriorityRepo.GetTicketPriorityByPriorityIdAsync(priorityId);
                 return Ok(ticketPriority);
             }
             catch (TicketPriorityException ex)
@@ -41,13 +41,13 @@ namespace TicketPriorityWebAPI.Controllers
         {
             try
             {
-                await ticketPriorityRepo.InsertTicketPriority(ticketPriority);
+                await ticketPriorityRepo.InsertTicketPriorityAsync(ticketPriority);
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                HttpClient client = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
                 client.DefaultRequestHeaders.Authorization = new
                             System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 await client.PostAsJsonAsync("TicketPriority", new { PriorityId = ticketPriority.PriorityId });
@@ -63,7 +63,7 @@ namespace TicketPriorityWebAPI.Controllers
         {
             try
             {
-                await ticketPriorityRepo.UpdateTicketPriority(priorityId, ticketPriority);
+                await ticketPriorityRepo.UpdateTicketPriorityAsync(priorityId, ticketPriority);
                 return Ok(ticketPriority);
             }
             catch(TicketPriorityException ex)
@@ -79,15 +79,15 @@ namespace TicketPriorityWebAPI.Controllers
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5031/api/TicketType/") };
+                HttpClient client5 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketTypeSvc/") };
                 client5.DefaultRequestHeaders.Authorization = new
                              System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response1 = await client5.DeleteAsync($"FromPriority/{priorityId}");
                 if (response1.IsSuccessStatusCode)
                 {
-                    await ticketPriorityRepo.DeleteTicketPriority(priorityId);
+                    await ticketPriorityRepo.DeleteTicketPriorityAsync(priorityId);
                     return Ok();
                 }
                 else
