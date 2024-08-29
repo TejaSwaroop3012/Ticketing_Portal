@@ -93,9 +93,9 @@ namespace TicketWebAPI.Controllers
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+                HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketFollowUpSvc/") };
                 client2.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 await client2.PostAsJsonAsync("Ticket", new { TicketId = ticket.TicketId });
@@ -152,9 +152,9 @@ namespace TicketWebAPI.Controllers
             string userName = "Suresh";
             string role = "admin";
             string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-            HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5153/api/Auth/") };
+            HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
             string token = await client1.GetStringAsync($"{userName}/{role}/{secretKey}");
-            HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5076/api/TicketFollowUp/") };
+            HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/ticketFollowUpSvc/") };
             client2.DefaultRequestHeaders.Authorization = new
                 System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response1 = await client2.DeleteAsync("DelTicket/" + ticketId);

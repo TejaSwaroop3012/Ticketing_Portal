@@ -158,6 +158,8 @@ namespace TicketLibrary.Repos
             Ticket t = await GetTicketById(ticketId);
             try
             {
+                t.EmpId = ticket.EmpId;
+                t.TicketTypeId = ticket.TicketTypeId;
                 t.Subject = ticket.Subject;
                 t.Description = ticket.Description;
                 t.CreatedDate = ticket.CreatedDate;
