@@ -22,7 +22,7 @@ namespace TipMvcApp.Controllers
                 string userName = User.Identity.Name;
                 string role = User.Claims.ToArray()[4].Value;
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
-                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5216/authSvc/") };
+                HttpClient client2 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
                 string token = await client2.GetStringAsync($"{userName}/{role}/{secretKey}");
                 HttpContext.Session.SetString("token", token);
             }

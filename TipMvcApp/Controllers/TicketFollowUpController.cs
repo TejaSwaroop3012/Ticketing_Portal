@@ -9,7 +9,7 @@ namespace TipMvcApp.Controllers
     [Authorize]
     public class TicketFollowUpController : Controller
     {
-        static HttpClient client = new HttpClient { BaseAddress = new Uri("http://localhost:5216/ticketFollowUpSvc/") };
+        static HttpClient client = new HttpClient { BaseAddress = new Uri("http://localhost:5026/ticketFollowUpSvc/") };
         // GET: TicketFollowUpController
         public async Task<ActionResult> Index()
         {
