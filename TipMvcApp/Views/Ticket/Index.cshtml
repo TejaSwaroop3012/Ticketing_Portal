@@ -56,12 +56,12 @@
                     @Html.DisplayFor(modelItem => item.CreatedDate)
                 </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { ticketId = item.TicketId }) |
-                    @Html.ActionLink("Details", "Details", new { ticketId = item.TicketId }) |
-                    @Html.ActionLink("ByEmpId", "ByEmpId", new { empId = item.EmpId}) |
-                    @Html.ActionLink("ByTypeId", "ByTypeId", new { typeId = item.TicketTypeId }) |
-                    @Html.ActionLink("ByEmpIdandTypeId", "ByEmpIdandTypeId", new { empId = item.EmpId, typeId = item.TicketTypeId }) |
-                    @Html.ActionLink("Delete", "Delete", new { ticketId = item.TicketId })
+                    @Html.ActionLink("Edit", "Edit", new { ticketId = item.TicketId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("Details", "Details", new { ticketId = item.TicketId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("ByEmpId", "ByEmpId", new { empId = item.EmpId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("ByTypeId", "ByTypeId", new { typeId = item.TicketTypeId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("ByEmpIdandTypeId", "ByEmpIdandTypeId", new { empId = item.EmpId, typeId = item.TicketTypeId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { ticketId = item.TicketId }, new { @class = "btn btn-outline-primary" })
                 </td>
         </tr>
 }
