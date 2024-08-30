@@ -20,3 +20,9 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.allcloud-img
+{
+    max-width : 5%;
+    height: auto;
+}
