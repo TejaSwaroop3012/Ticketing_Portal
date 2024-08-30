@@ -36,7 +36,7 @@ namespace TipMvcApp.Controllers
         }
 
         // GET: TicketTypeController/Create
-        
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
@@ -45,7 +45,7 @@ namespace TipMvcApp.Controllers
         // POST: TicketTypeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(TicketType ticketType)
         {
             if (!ModelState.IsValid)
