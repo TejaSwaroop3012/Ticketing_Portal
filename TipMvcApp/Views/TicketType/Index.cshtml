@@ -43,10 +43,10 @@
                 @Html.DisplayFor(modelItem => item.PriorityId)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { TypeId = item.TicketTypeId }) |
-                    @Html.ActionLink("ByAssignedEmpId", "ByAssignedEmpId", new { EmpId = item.AssignedToEmpId }) |
-                    @Html.ActionLink("Details", "Details", new { TypeId = item.TicketTypeId }) |
-                    @Html.ActionLink("Delete", "Delete", new { TypeId = item.TicketTypeId })
+                    @Html.ActionLink("Edit", "Edit", new { TypeId = item.TicketTypeId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("ByAssignedEmpId", "ByAssignedEmpId", new { EmpId = item.AssignedToEmpId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("Details", "Details", new { TypeId = item.TicketTypeId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { TypeId = item.TicketTypeId }, new { @class = "btn btn-outline-primary" })
             </td>
         </tr>
 }
