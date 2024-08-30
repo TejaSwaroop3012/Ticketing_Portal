@@ -4,6 +4,7 @@ using EmployeeLibrary.Models;
 using EmployeeLibrary.Repos;
 using Microsoft.AspNetCore.Authorization;
 using Azure;
+using System.Text.Json;
 
 
 namespace EmployeeWebAPI.Controllers
@@ -60,7 +61,7 @@ namespace EmployeeWebAPI.Controllers
             }
             catch(EmployeeException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new {Message = ex.Message});
             }
         }
         [HttpPut("{empId}")]
@@ -79,9 +80,7 @@ namespace EmployeeWebAPI.Controllers
         [HttpDelete("{empId}")]
         public async Task<ActionResult> Delete(int empId)
         {
-            try
-            {
-                string userName = "Suresh";
+              string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
                 HttpClient client1 = new HttpClient() { BaseAddress = new Uri("http://localhost:5026/authSvc/") };
@@ -115,13 +114,23 @@ namespace EmployeeWebAPI.Controllers
                                         System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                         await client5.PostAsJsonAsync("Employee/", new { EmpId = empId });
                     }
-                    return BadRequest("Cannot delete the Employee");
+                    string errorMessage = string.Empty;
+                    if (!response1.IsSuccessStatusCode)
+                    {
+                       var errContent = await response1.Content.ReadAsStringAsync();
+                       var errorObj = System.Text.Json.JsonSerializer.Deserialize<JsonElement>(errContent);
+                       errorMessage += errorObj.GetProperty("message").GetString() + "\n";
+                    }
+                    if (!response2.IsSuccessStatusCode)
+                    {
+                        var errContent = await response2.Content.ReadAsStringAsync();
+                        var errorObj = System.Text.Json.JsonSerializer.Deserialize<JsonElement>(errContent);
+                        errorMessage += errorObj.GetProperty("message").GetString();
+
+                    }
+                    return BadRequest(errorMessage);
                 }
-            }
-            catch(EmployeeException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+           
         }
     }
 }

@@ -91,7 +91,7 @@ namespace TicketFollowUpWebAPI.Controllers
             }
             catch (TicketFollowUpException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
 
@@ -133,7 +133,7 @@ namespace TicketFollowUpWebAPI.Controllers
             }
             catch (TicketFollowUpException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
 
@@ -161,7 +161,7 @@ namespace TicketFollowUpWebAPI.Controllers
             }
             catch (TicketFollowUpException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
     }

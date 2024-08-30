@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TipMvcApp.Models;
 using TipMvcApp.Filters;
+using Azure;
+using System.Text.Json;
 
 namespace TipMvcApp.Controllers
 {
@@ -58,15 +60,18 @@ namespace TipMvcApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create(TicketFollowUp ticketFollowUp)
         {
-            try
+            var response = await client.PostAsJsonAsync<TicketFollowUp>("", ticketFollowUp);
+            if (response.IsSuccessStatusCode)
             {
-                var response = await client.PostAsJsonAsync<TicketFollowUp>("", ticketFollowUp);
-                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
-            catch (HttpRequestException ex)
+            else
             {
-                throw;
+                var errorContent = await response.Content.ReadAsStringAsync();
+                var errorObj = JsonSerializer.Deserialize<JsonElement>(errorContent);
+                string errorMessage = errorObj.GetProperty("message").GetString();
+
+                throw new Exception(errorMessage);
             }
         }
 

@@ -20,7 +20,7 @@ namespace TicketFollowUpLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketFollowUpException(ex.Message);
+                throw new TicketFollowUpException(ex.InnerException.Message);
             }
         }
 
@@ -47,7 +47,7 @@ namespace TicketFollowUpLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketFollowUpException(ex.Message);
+                throw new TicketFollowUpException(ex.InnerException.Message);
             }
         }
 
@@ -132,7 +132,7 @@ namespace TicketFollowUpLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketFollowUpException(ex.Message);
+                throw new TicketFollowUpException(ex.InnerException.Message);
             }
         }
 

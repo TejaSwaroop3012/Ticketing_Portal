@@ -111,15 +111,15 @@ namespace TipMvcApp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int empId,Employee employee)
         {
-            try
+            var response = await client.DeleteAsync($"{empId}");
+            if (response.IsSuccessStatusCode)
             {
-                var response = await client.DeleteAsync($"{empId}");
-                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                throw;
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
             }
         }
     }
