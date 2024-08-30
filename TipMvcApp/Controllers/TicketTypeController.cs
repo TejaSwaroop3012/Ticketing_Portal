@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using TipMvcApp.Models;
 
 
@@ -46,14 +47,20 @@ namespace TipMvcApp.Controllers
         
         public async Task<ActionResult> Create(TicketType ticketType)
         {
-            try
+            if (!ModelState.IsValid)
+                return View();
+            var response= await client.PostAsJsonAsync<TicketType>("", ticketType);
+            if(response.IsSuccessStatusCode)
             {
-                await client.PostAsJsonAsync<TicketType>("", ticketType);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                return View();
+                var errorContent = await response.Content.ReadAsStringAsync();
+                var errorObj = JsonSerializer.Deserialize<JsonElement>(errorContent);
+                string errorMessage = errorObj.GetProperty("message").GetString();
+
+                throw new Exception(errorMessage);
             }
         }
 
@@ -102,15 +109,14 @@ namespace TipMvcApp.Controllers
         {
             try
             {
-                await client.DeleteAsync($"FromTicketType/{TypeId}");
+                var response = await client.DeleteAsync($"FromTicketType/{TypeId}");
+                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                throw;
             }
         }
-
-
     }
 }
