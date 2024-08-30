@@ -11,7 +11,7 @@
 <p>
     <a type="submit" class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<table class="table table-hover table-striped table-bordered" ">
+<table class="table table-hover table-striped table-bordered">
     <thead>
         <tr>
             <th>
@@ -29,35 +29,30 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TicketId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmpId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TicketTypeId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Subject)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { empId=item.EmpId }) |
-                    @Html.ActionLink("Details", "Details", new { empId = item.EmpId }) |
-                    @Html.ActionLink("Delete", "Delete", new { empId = item.EmpId })
-            </td>
-        </tr>
-}
-        
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmpId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TicketTypeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Subject)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+
     </tbody>
 </table>
 <div>
