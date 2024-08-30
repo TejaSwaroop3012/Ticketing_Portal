@@ -37,83 +37,42 @@ body{
 }
 
 .card {
-    flex: 1;
-    min-width: 250px;
-    max-width: 300px;
-    background-color: #ffffff;
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    display: block; /* Ensure the card is block level for full coverage */
+    cursor: pointer; /* Change cursor to indicate clickability */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
+    border: none; /* Remove default border */
+    border-radius: 15px; /* Rounded corners */
+    overflow: hidden; /* Ensure contents do not overflow */
 }
 
-    .card:hover {
-        transform: translateY(-10px);
-    }
+.card-img-top {
+    width: 100%; /* Ensure the image covers the full width of the card */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Ensure image displays correctly */
+}
 
 .card-body {
-    padding: 30px;
-    text-align: center;
+    padding: 15px; /* Adjust padding for better spacing */
+    color: #333; /* Dark text color for visibility */
 }
 
 .card-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 15px;
+    color: #333; /* Dark color for title text */
 }
 
 .card-text {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
+    color: #555; /* Slightly lighter color for card text */
 }
 
-.btn-outline-primary {
-    font-size: 0.9rem;
-    font-weight: 600;
-    padding: 10px 20px;
+/* Hover effects */
+.card:hover {
+    transform: translateY(-10px); /* Lift card on hover */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 
 .card-link {
     text-decoration: none; /* Remove underline from links */
-    color: inherit; /* Inherit the color from parent elements */
-    display: block; /* Ensure the link covers the entire card */
+    color: inherit; /* Inherit color from parent */
+    display: block; /* Make link cover entire */
 }
-
-.card {
-    display: block; /* Make the card a block element to fill the link area */
-    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add smooth transition effects */
-}
-
-    .card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Slightly increase the shadow on hover */
-    }
-
-.card-body {
-    color: #333; /* Ensure text color is dark enough to be visible */
-}
-
-.card-title {
-    color: #333; /* Ensure the title text color is dark enough */
-}
-
-.card-text {
-    color: #555; /* Slightly lighter color for card text for better readability */
-}
-
-.card-link:hover .card-body {
-    color: inherit; /* Ensure color does not change on hover */
-}
-
-.card-link:hover .card-title,
-.card-link:hover .card-text {
-    color: inherit; /* Ensure text color remains consistent on hover */
-}
-
-has context menu
-
-
 
