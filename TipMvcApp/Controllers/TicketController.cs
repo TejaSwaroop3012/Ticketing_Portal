@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using TipMvcApp.Models;
 
 namespace TipMvcApp.Controllers
@@ -40,7 +41,8 @@ namespace TipMvcApp.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            return View();
+            Ticket ticket = new Ticket();
+            return View(ticket);
         }
 
         [HttpPost]
@@ -48,14 +50,19 @@ namespace TipMvcApp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(Ticket ticket)
         {
-            try
-            {
-                await client.PostAsJsonAsync<Ticket>("", ticket);
+            if (!ModelState.IsValid)
+                return View();
+            var response = await client.PostAsJsonAsync<Ticket>("", ticket);
+            if(response.IsSuccessStatusCode)
+            { 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                return View();
+                var errorContent = await response.Content.ReadAsStringAsync();
+                var errorObj = JsonSerializer.Deserialize<JsonElement>(errorContent);
+                string errorMessage = errorObj.GetProperty("message").GetString();
+                throw new Exception(errorMessage);
             }
         }
         
@@ -99,12 +106,13 @@ namespace TipMvcApp.Controllers
         {
             try
             {
-                await client.DeleteAsync($"{ticketId}");
+                var response=await client.DeleteAsync($"{ticketId}");
+                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                throw;
             }
         }
     }
