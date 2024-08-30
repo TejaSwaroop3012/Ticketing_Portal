@@ -5,6 +5,7 @@ namespace TipMvcApp.Models
     public class Employee
     {
         [Display(Name = "Employee Id")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter the employee id greater than 1")]
         public int EmpId { get; set; }
 
         [MaxLength(30, ErrorMessage ="First Name cannot be more than 30 characters")]
