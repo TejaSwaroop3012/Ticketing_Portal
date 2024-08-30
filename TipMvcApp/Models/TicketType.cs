@@ -5,7 +5,7 @@ namespace TipMvcApp.Models
     public class TicketType
     {
         [Required(ErrorMessage = "This field is necessary")]
-        [Range(1, int.MaxValue, ErrorMessage = "Please enter the Ticket Type Id greater than 1")]
+        [Range(1, int.MaxValue, ErrorMessage = "Please enter the Ticket Type Id greater than zero")]
         [Display(Name = "Ticket Type Id")]
         public int TicketTypeId { get; set; }
 
