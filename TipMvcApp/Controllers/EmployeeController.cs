@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TipMvcApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
 
 namespace TipMvcApp.Controllers
 {
@@ -51,8 +52,19 @@ namespace TipMvcApp.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            await client.PostAsJsonAsync<Employee>("", employee);
-            return RedirectToAction(nameof(Index));
+            var response = await client.PostAsJsonAsync<Employee>("", employee);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                var errorObj = JsonSerializer.Deserialize<JsonElement>(errorContent);
+                string errorMessage = errorObj.GetProperty("message").GetString();
+
+                throw new Exception(errorMessage);
+            }
             
         }
 
@@ -101,12 +113,13 @@ namespace TipMvcApp.Controllers
         {
             try
             {
-                await client.DeleteAsync($"{empId}");
+                var response = await client.DeleteAsync($"{empId}");
+                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
-            catch 
+            catch
             {
-                return View();
+                throw;
             }
         }
     }

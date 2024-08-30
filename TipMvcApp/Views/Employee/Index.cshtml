@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TipMvcApp.Models.Employee>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Employee Index";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a type="submit" class="btn btn-primary" asp-action="Create">Create New</a>
+    <a type="submit" class="btn btn-primary" asp-action="Create">Add Employee</a>
 </p>
 <table class="table table-hover table-striped table-bordered">
     <thead>
@@ -27,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.MobileNo)
             </th>
-            <th></th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.MobileNo)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { empId = item.EmpId}) |
-                    @Html.ActionLink("Details", "Details", new { empId = item.EmpId }) |
-                    @Html.ActionLink("Delete", "Delete", new { empId = item.EmpId })
+                    @Html.ActionLink("Edit", "Edit", new { empId = item.EmpId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("Details", "Details", new { empId = item.EmpId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { empId = item.EmpId }, new { @class = "btn btn-outline-danger" })
             </td>
         </tr>
 }

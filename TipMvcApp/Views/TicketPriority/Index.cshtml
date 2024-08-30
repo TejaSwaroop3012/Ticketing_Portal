@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<TipMvcApp.Models.TicketPriority>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Ticket Priority Index";
 }
 
 <h1>Index</h1>
 
 <p>
-    <a type="submit" class="btn btn-primary" asp-action="Create">Create New</a>
+    <a type="submit" class="btn btn-primary" asp-action="Create">Add A Priority</a>
 </p>
 <table class="table table-hover table-striped table-bordered">
     <thead>
@@ -24,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ResolveWithin)
             </th>
-            <th></th>
+            <th> Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.ResolveWithin)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { priorityId = item.PriorityId }) |
-                    @Html.ActionLink("Details", "Details", new { priorityId = item.PriorityId }) |
-                    @Html.ActionLink("Delete", "Delete", new { priorityId = item.PriorityId })
+                @Html.ActionLink("Edit", "Edit", new { priorityId = item.PriorityId }, new {@class = "btn btn-outline-primary"}) |
+                    @Html.ActionLink("Details", "Details", new { priorityId = item.PriorityId }, new { @class = "btn btn-outline-primary" }) |
+                    @Html.ActionLink("Delete", "Delete", new { priorityId = item.PriorityId }, new { @class = "btn btn-outline-danger" })
             </td>
         </tr>
 }

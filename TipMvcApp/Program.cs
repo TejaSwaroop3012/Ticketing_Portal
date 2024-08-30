@@ -24,6 +24,7 @@ namespace TipMvcApp
             builder.Services.AddMvc(options =>
             {
                 options.Filters.Add(new LogActionFilterAttribute());
+                options.Filters.Add<CustomExceptionFilter>();
             });
 
             builder.Services.AddSession();

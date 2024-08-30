@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TipMvcApp.Models;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
 
 namespace TipMvcApp.Controllers
 {
@@ -37,15 +38,24 @@ namespace TipMvcApp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(TicketPriority ticketPriority)
         {
-            try
-            {
-                await client.PostAsJsonAsync<TicketPriority>("", ticketPriority);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if(!ModelState.IsValid)
             {
                 return View();
             }
+                var response = await client.PostAsJsonAsync<TicketPriority>("", ticketPriority);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                var errorContent = await response.Content.ReadAsStringAsync();
+                var errorObj = JsonSerializer.Deserialize<JsonElement>(errorContent);
+                string errorMessage = errorObj.GetProperty("message").GetString();
+
+                throw new Exception(errorMessage);
+            }
+           
         }
         // GET: TicketPriorityController/Edit/5
         [Route("TicketPriority/Edit/{priorityId}")]
@@ -90,12 +100,13 @@ namespace TipMvcApp.Controllers
         {
             try
             {
-                await client.DeleteAsync($"{priorityId}");
+                var response = await client.DeleteAsync($"{priorityId}");
+                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                throw;
             }
         }
     }

@@ -14,7 +14,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="PriorityId" class="control-label"></label>
-                <input asp-for="PriorityId" class="form-control" />
+                <input asp-for="PriorityId" readonly class="form-control" />
                 <span asp-validation-for="PriorityId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -33,15 +33,13 @@
                 <span asp-validation-for="ResolveWithin" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" /> |
+                <a type="submit" class="btn btn-outline-primary" asp-action="Index">Back to List</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a type="submit" class="btn btn-outline-primary" asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
