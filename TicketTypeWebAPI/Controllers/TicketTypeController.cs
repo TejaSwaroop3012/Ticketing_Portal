@@ -6,6 +6,8 @@ using TicketTypeLibrary.Repos;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Authorization;
+using Azure;
+using System.Text.Json;
 
 namespace TicketTypeWebAPI.Controllers
 {
@@ -125,7 +127,7 @@ namespace TicketTypeWebAPI.Controllers
             }
             catch (TicketTypeException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
         [HttpPut("{TypeId}")]
@@ -144,9 +146,6 @@ namespace TicketTypeWebAPI.Controllers
         [HttpDelete("FromTicketType/{TypeId}")]
         public async Task<ActionResult> Delete(int TypeId)
         {
-            try
-            { 
-
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
@@ -163,13 +162,15 @@ namespace TicketTypeWebAPI.Controllers
                     }
                     else
                     {
-                        return BadRequest("Cannot delete");
+                        string errorMessage = string.Empty;
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            var errContent = await response.Content.ReadAsStringAsync();
+                            var errorObj = System.Text.Json.JsonSerializer.Deserialize<JsonElement>(errContent);
+                            errorMessage += errorObj.GetProperty("message").GetString() + "\n";
+                        }
+                        return BadRequest(errorMessage);
                     }        
-            }
-            catch (TicketTypeException ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
         [HttpDelete("FromEmployee/{EmpId}")]
         public async Task<ActionResult> DeleteFromEmployee(int EmpId)
@@ -181,7 +182,7 @@ namespace TicketTypeWebAPI.Controllers
             }
             catch (TicketTypeException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
         [HttpDelete("FromPriority/{priorityId}")]
@@ -194,7 +195,7 @@ namespace TicketTypeWebAPI.Controllers
             }
             catch (TicketTypeException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
     }

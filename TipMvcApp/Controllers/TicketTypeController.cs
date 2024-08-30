@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -106,16 +107,16 @@ namespace TipMvcApp.Controllers
         [Route("TicketType/Delete/{TypeId}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int TypeId, IFormCollection collection)
-        {
-            try
+        {       
+             var response = await client.DeleteAsync($"FromTicketType/{TypeId}");
+            if (response.IsSuccessStatusCode)
             {
-                var response = await client.DeleteAsync($"FromTicketType/{TypeId}");
-                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                throw;
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
             }
         }
     }

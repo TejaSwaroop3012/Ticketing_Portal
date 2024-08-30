@@ -35,7 +35,7 @@ namespace TicketLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketException(ex.Message);
+                throw new TicketException(ex.InnerException.Message);
             }
         }
         public async Task AddTicketAsync(Ticket ticket)
@@ -47,7 +47,7 @@ namespace TicketLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketException(ex.Message);
+                throw new TicketException(ex.InnerException.Message);
             }
         }
 
@@ -61,7 +61,7 @@ namespace TicketLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketException(ex.Message);
+                throw new TicketException(ex.InnerException.Message);
             }
         }
 
@@ -75,7 +75,7 @@ namespace TicketLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketException(ex.Message);
+                throw new TicketException(ex.InnerException.Message);
             }
         }
 
@@ -89,7 +89,7 @@ namespace TicketLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketException(ex.Message);
+                throw new TicketException(ex.InnerException.Message);
             }
         }
         public async Task<List<Ticket>> GetAllTicketsAsync()

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Net.Sockets;
+using System.Text.Json;
 using TicketLibrary.Models;
 using TicketLibrary.Repos;
 
@@ -103,7 +104,7 @@ namespace TicketWebAPI.Controllers
             }
             catch (TicketException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
         [HttpPost("Employee")]
@@ -116,7 +117,7 @@ namespace TicketWebAPI.Controllers
             }
             catch (TicketException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
         [HttpPost("TicketType")]
@@ -129,7 +130,7 @@ namespace TicketWebAPI.Controllers
             }
             catch (TicketException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
         [HttpPut("{ticketId}")]
@@ -165,7 +166,14 @@ namespace TicketWebAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest("Cannot delete the Ticket");
+                    string errorMessage = string.Empty;
+                    if (!response1.IsSuccessStatusCode)
+                    {
+                        var errContent = await response1.Content.ReadAsStringAsync();
+                        var errorObj = System.Text.Json.JsonSerializer.Deserialize<JsonElement>(errContent);
+                        errorMessage += errorObj.GetProperty("message").GetString() + "\n";
+                    }
+                    return BadRequest(errorMessage);
                 }
         }
         [HttpDelete("Employee/{empId}")]
@@ -178,7 +186,7 @@ namespace TicketWebAPI.Controllers
             }
             catch (TicketException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new {Message = ex.Message});
             }
         }
         [HttpDelete("TicketType/{typeId}")]
@@ -191,7 +199,7 @@ namespace TicketWebAPI.Controllers
             }
             catch (TicketException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
     }

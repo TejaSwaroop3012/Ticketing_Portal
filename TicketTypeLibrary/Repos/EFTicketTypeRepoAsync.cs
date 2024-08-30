@@ -33,7 +33,7 @@ namespace TicketTypeLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException(ex.InnerException.Message);
             }
         }
         public async Task<Employee> GetEmployeebyIdAsync(int empId)
@@ -60,7 +60,7 @@ namespace TicketTypeLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException(ex.InnerException.Message);
             }
         }
 
@@ -87,7 +87,7 @@ namespace TicketTypeLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException(ex.InnerException.Message);
             }
         }
 
@@ -101,7 +101,7 @@ namespace TicketTypeLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException(ex.InnerException.Message);
             }
         }
 
@@ -144,7 +144,7 @@ namespace TicketTypeLibrary.Repos
             }
             catch (Exception ex)
             {
-                throw new TicketTypeException(ex.Message);
+                throw new TicketTypeException(ex.InnerException.Message);
             }
         }
 

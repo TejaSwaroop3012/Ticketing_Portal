@@ -21,7 +21,7 @@ namespace TicketPriorityLibrary.Repos
             }
             catch(Exception ex)
             {
-                throw new TicketPriorityException(ex.Message);
+                throw new TicketPriorityException(ex.InnerException.Message);
             }
         }
 
@@ -53,7 +53,7 @@ namespace TicketPriorityLibrary.Repos
             }
             catch(Exception ex)
             {
-                throw new TicketPriorityException(ex.Message);
+                throw new TicketPriorityException(ex.InnerException.Message);
             }
         }
 

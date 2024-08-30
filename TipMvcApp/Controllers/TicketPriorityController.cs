@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TipMvcApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
+using Azure;
 
 namespace TipMvcApp.Controllers
 {
@@ -98,15 +99,15 @@ namespace TipMvcApp.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int priorityId, IFormCollection collection)
         {
-            try
+            var response = await client.DeleteAsync($"{priorityId}");
+            if (response.IsSuccessStatusCode)
             {
-                var response = await client.DeleteAsync($"{priorityId}");
-                response.EnsureSuccessStatusCode();
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            else
             {
-                throw;
+                var errorContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(errorContent);
             }
         }
     }
