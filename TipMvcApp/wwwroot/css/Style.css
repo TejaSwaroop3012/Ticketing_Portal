@@ -8,6 +8,7 @@ body{
     color: white;
 }
 
+
 .hero-section {
     background: none; 
     color: white; 
@@ -37,42 +38,58 @@ body{
 }
 
 .card {
-    display: block; /* Ensure the card is block level for full coverage */
-    cursor: pointer; /* Change cursor to indicate clickability */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition effects */
-    border: none; /* Remove default border */
-    border-radius: 15px; /* Rounded corners */
-    overflow: hidden; /* Ensure contents do not overflow */
+    display: block; 
+    cursor: pointer; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    border: none; 
+    border-radius: 15px; 
+    overflow: hidden; 
+    min-width:300px;
+    max-width:350px;
+    height:250px;
 }
 
 .card-img-top {
-    width: 100%; /* Ensure the image covers the full width of the card */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Ensure image displays correctly */
+    width: 100%; 
+    height: auto; 
+    display: block; 
 }
 
 .card-body {
-    padding: 15px; /* Adjust padding for better spacing */
-    color: #333; /* Dark text color for visibility */
+    padding: 15px; 
+    color: #333; 
 }
 
 .card-title {
-    color: #333; /* Dark color for title text */
+    align-content:center;
+    color: #333; 
 }
 
 .card-text {
-    color: #555; /* Slightly lighter color for card text */
+    color: #555; 
 }
 
-/* Hover effects */
+
 .card:hover {
-    transform: translateY(-10px); /* Lift card on hover */
-    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.15); 
 }
 
 .card-link {
-    text-decoration: none; /* Remove underline from links */
-    color: inherit; /* Inherit color from parent */
-    display: block; /* Make link cover entire */
+    text-decoration: none; 
+    color: inherit; 
+    display: block; 
+}
+
+.footer{
+    background-color: #343a40;
+    color:white;
+    padding: 20px 0;
+    text-align: center;
+    border-radius: 50px 50px 0 0;
+    box-shadow: 0 -50px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    bottom: 0;
+    width: 100%;
 }
 
