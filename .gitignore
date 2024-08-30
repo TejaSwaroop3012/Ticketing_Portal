@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/TipMvcApp/Views/Shared/_Layout.cshtml
+/TipMvcApp/wwwroot/css/Style.css

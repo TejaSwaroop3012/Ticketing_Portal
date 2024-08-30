@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using TicketPriorityLibrary.Models;
 using TicketPriorityLibrary.Repos;
 
@@ -55,7 +56,7 @@ namespace TicketPriorityWebAPI.Controllers
             }
             catch(TicketPriorityException ex)
             {
-                return BadRequest(ex.Message);
+                return BadRequest(new { Message = ex.Message });
             }
         }
         [HttpPut("{priorityId}")]
@@ -74,8 +75,6 @@ namespace TicketPriorityWebAPI.Controllers
         [HttpDelete("{priorityId}")]
         public async Task<ActionResult> Delete(int priorityId)
         {
-            try
-            {
                 string userName = "Suresh";
                 string role = "admin";
                 string secretKey = "My name is Maximus Decimas Meridias, Husband to a murderd wife, Father to a murderd Son";
@@ -92,13 +91,16 @@ namespace TicketPriorityWebAPI.Controllers
                 }
                 else
                 {
-                    return BadRequest("Cannot delete the priorityId");
+                    string errorMessage = string.Empty;
+                    if (!response1.IsSuccessStatusCode)
+                    {
+                        var errContent = await response1.Content.ReadAsStringAsync();
+                        var errorObj = System.Text.Json.JsonSerializer.Deserialize<JsonElement>(errContent);
+                        errorMessage += errorObj.GetProperty("message").GetString() + "\n";
+                    }
+                    return BadRequest(errorMessage);
                 }
-            }
-            catch (TicketPriorityException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            
         }
         
     }
