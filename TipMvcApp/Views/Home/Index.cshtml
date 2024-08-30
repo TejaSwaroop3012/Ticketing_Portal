@@ -1,65 +1,67 @@
-﻿@{ ViewData["Title"] = "AllCloud Ticketing Portal"; }
- 
-<link rel="stylesheet" href ="~/css/Style.css"/>
+﻿@{
+    ViewData["Title"] = "AllCloud Ticketing Portal";
+}
+<link rel="stylesheet" href="~/css/Style.css" />
 
- 
+<style>
+    .card img {
+        width: 120px;
+        height: 120px;
+        display: block;
+        margin: 0 auto 15px auto;
+        object-fit: contain;
+    }
+</style>
 <div class="hero-section">
     <h1 class="display-4">Welcome to AllCloud Ticketing Portal</h1>
-    <p class="lead">Efficiently manage your IT support and service requests</p>
+    
 </div>
- 
-<div class="container card-container">   
+<div class="container card-container">
     <a href="../Employee" class="card-link">
-    <div class="card">
-        <img src="~/Images/employee.png" alt="Card image" class="card-img-top" />
-        <div class="card-body">
-            <h5 class="card-title">Manage Employee Profile</h5>
-            <p class="card-text">Update Employee information.</p>           
+        <div class="card">
+            <img src="~/Images/Media (3).png" alt="Card image" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">Manage Employee Profile</h5>
+            </div>
         </div>
-    </div>
     </a>
 
     <a href="../TicketPriority" class="card-link">
-    <div class="card">
-            <img src="~/Images/employee.png" alt="Card image" class="card-img-top" />
-        <div class="card-body">
-            <h5 class="card-title">Know Priorities of tickets</h5>
-            <p class="card-text">Ticket priorities based on the Priority.</p>
+        <div class="card">
+            <img src="~/Images/Media (6).png" alt="Card image" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">Know Priorities of tickets</h5>
+            </div>
         </div>
-    </div>
     </a>
 
     <a href="../TicketType" class="card-link">
-    <div class="card">
-    <img src="~/Images/employee.png" alt="Card image" class="card-img-top" />
-        <div class="card-body">
-            <h5 class="card-title">Know Different Types of Tickets</h5>
-            <p class="card-text">Know about the different types of tickets AllCloud serves.</p>
+        <div class="card">
+            <img src="~/Images/Media (7).png" alt="Card image" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">Know Different Types of Tickets</h5>
+            </div>
         </div>
-    </div>
     </a>
 
     <a href="../Ticket" class="card-link">
-    <div class="card">
-     <img src="~/Images/employee.png" alt="Card image" class="card-img-top" />
-        <div class="card-body">
-            <h5 class="card-title">Submit a New Ticket</h5>
-            <p class="card-text">Having an issue? Submit a new ticket for quick resolution.</p>
+        <div class="card">
+            <img src="~/Images/Media (4).png" alt="Card image" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">Submit a New Ticket</h5>
+            </div>
         </div>
-    </div>
     </a>
 
     <a href="../TicketFollowUp" class="card-link">
-    <div class="card">
-    <img src="~/Images/employee.png" alt="Card image" class="card-img-top" />
-        <div class="card-body">
-            <h5 class="card-title">Follow Up Tickets</h5>
-            <p class="card-text">Follow up on the submitted tickets.</p>
+        <div class="card">
+            <img src="~/Images/Media (5).png" alt="Card image" class="card-img-top" />
+            <div class="card-body">
+                <h5 class="card-title">Follow Up Tickets</h5>
+            </div>
         </div>
-    </div>
     </a>
 </div>
- 
 <footer class="footer">
     <p>&copy; @DateTime.Now.Year AllCloud. All rights reserved.</p>
 </footer>
