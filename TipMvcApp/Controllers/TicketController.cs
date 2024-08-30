@@ -38,7 +38,6 @@ namespace TipMvcApp.Controllers
             Ticket ticket = await client.GetFromJsonAsync<Ticket>($"GetTicketByTicketId/{ticketId}");
             return View(ticket);
         }
-        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             Ticket ticket = new Ticket();
@@ -47,7 +46,6 @@ namespace TipMvcApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Create(Ticket ticket)
         {
             if (!ModelState.IsValid)
