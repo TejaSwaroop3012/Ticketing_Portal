@@ -15,9 +15,12 @@ namespace TipMvcApp.Models
         public int TicketTypeId { get; set; }
         [Display(Name ="Subject")]
         [MaxLength(50,ErrorMessage ="Subject must be less than 50 character")]
+        [Required(ErrorMessage = "This field is necessary")]
         public string Subject { get; set; } = null!;
         [Display(Name ="Description")]
         [MaxLength(100, ErrorMessage = "Description must be less than 100 character")]
+        [Required(ErrorMessage = "This field is necessary")]
+
         public string Description { get; set; } = null!;
         
         public DateOnly? CreatedDate { get; set; }
