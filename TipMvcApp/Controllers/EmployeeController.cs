@@ -17,7 +17,6 @@ namespace TipMvcApp.Controllers
             client.DefaultRequestHeaders.Authorization = new
                     System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
             List<Employee> employees = await client.GetFromJsonAsync<List<Employee>>("");
-            empId = employees.Count();
             return View(employees);
         }
 
@@ -35,13 +34,11 @@ namespace TipMvcApp.Controllers
             }
         }
         // GET: EmployeeController/Create
-        static int empId;
+
        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            Employee employee = new Employee();
-            employee.EmpId = empId + 1;
-            return View(employee);
+            return View();
         }
 
         // POST: EmployeeController/Create

@@ -12,7 +12,6 @@ namespace TipMvcApp.Controllers
     public class TicketTypeController : Controller
     {
         static HttpClient client = new HttpClient { BaseAddress = new Uri(" http://localhost:5026/ticketTypeSvc/") };
-        // GET: TicketTypeController
         public async Task<ActionResult> Index()
         {
             string token = HttpContext.Session.GetString("token");
@@ -21,28 +20,21 @@ namespace TipMvcApp.Controllers
             List<TicketType> ticketTypes = await client.GetFromJsonAsync<List<TicketType>>("");
             return View(ticketTypes);
         }
-
-        // GET: TicketTypeController/Details/5
         public async Task<ActionResult> Details(int TypeId)
         {
             TicketType ticketType = await client.GetFromJsonAsync<TicketType>($"ByTypeId/{TypeId}");
             return View(ticketType);
         }
-
         public async Task<ActionResult> ByAssignedEmpId(int EmpId)
         {
             List<TicketType> ticketTypes = await client.GetFromJsonAsync<List<TicketType>>($"ByEmployeeId/{EmpId}");
             return View(ticketTypes);
         }
-
-        // GET: TicketTypeController/Create
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
             return View();
         }
-
-        // POST: TicketTypeController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -64,8 +56,6 @@ namespace TipMvcApp.Controllers
                 throw new Exception(errorMessage);
             }
         }
-
-        // GET: TicketTypeController/Edit/5
         [Route("TicketType/Edit/{TypeId}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int TypeId)
@@ -73,8 +63,6 @@ namespace TipMvcApp.Controllers
             TicketType ticketType = await client.GetFromJsonAsync<TicketType>($"ByTypeId/{TypeId}");
             return View(ticketType);
         }
-
-        // POST: TicketTypeController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("TicketType/Edit/{TypeId}")]
@@ -91,8 +79,6 @@ namespace TipMvcApp.Controllers
                 return View();
             }
         }
-
-        // GET: TicketTypeController/Delete/5
         [Route("TicketType/Delete/{TypeId}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int TypeId)
@@ -100,8 +86,6 @@ namespace TipMvcApp.Controllers
             TicketType ticketType = await client.GetFromJsonAsync<TicketType>("ByTypeId/" + TypeId);
             return View(ticketType);
         }
-
-        // POST: TicketTypeController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("TicketType/Delete/{TypeId}")]
